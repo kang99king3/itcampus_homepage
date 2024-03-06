@@ -1,18 +1,27 @@
 package itcampus.com.config;
 
+import java.util.Collections;
+import java.util.HashMap;
+
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.interceptor.*;
-
-import javax.sql.DataSource;
-import java.util.Collections;
-import java.util.HashMap;
+import org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource;
+import org.springframework.transaction.interceptor.RollbackRuleAttribute;
+import org.springframework.transaction.interceptor.RuleBasedTransactionAttribute;
+import org.springframework.transaction.interceptor.TransactionAttribute;
+import org.springframework.transaction.interceptor.TransactionInterceptor;
 
 @Configuration
 public class EgovConfigTransaction {
@@ -46,8 +55,10 @@ public class EgovConfigTransaction {
 	@Bean
 	public Advisor txAdvisor(@Qualifier("txManager") DataSourceTransactionManager txManager) {
 		AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-		pointcut.setExpression("execution(* egovframework.example.sample..impl.*Impl.*(..))");
+//		pointcut.setExpression("execution(* egovframework.example.sample..impl.*Impl.*(..))");
+		pointcut.setExpression("execution(* itcampus.com..impl.*Impl.*(..))");
+
 		return new DefaultPointcutAdvisor(pointcut, txAdvice(txManager));
 	}
-
+	
 }

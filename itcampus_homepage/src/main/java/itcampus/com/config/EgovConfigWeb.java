@@ -1,6 +1,10 @@
 package itcampus.com.config;
 
 
+import java.util.List;
+import java.util.Properties;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -18,10 +22,8 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
+import itcampus.com.interceptor.LoginInterceptor;
 import itcampus.com.pagination.EgovPaginationDialect;
-
-import java.util.List;
-import java.util.Properties;
 
 @Configuration
 @Import({
@@ -89,10 +91,18 @@ public class EgovConfigWeb implements WebMvcConfigurer, ApplicationContextAware 
 		interceptor.setParamName("language");
 		return interceptor;
 	}
-
+	
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeChangeInterceptor());
+		
+		final LoginInterceptor loginInterceptor = new LoginInterceptor();
+
+		registry.addInterceptor(loginInterceptor)
+				.addPathPatterns("/admin/**")
+				.excludePathPatterns("/admin/login");
+		
 	}
 
 	@Override
