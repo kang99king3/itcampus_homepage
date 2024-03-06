@@ -46,7 +46,7 @@ public class AdminController {
 
 		if (loginmemberVO != null) { 
 			// session 생성 
-			logger.debug(loginmemberVO.get(0).getM_id());
+			logger.debug(loginmemberVO.getM_name());
 		} else { 
 			// 로그인 fail 
 			logger.debug("ID / PW 틀림 "  + memberVO.getM_id() + ":" + memberVO.getM_pwd());
