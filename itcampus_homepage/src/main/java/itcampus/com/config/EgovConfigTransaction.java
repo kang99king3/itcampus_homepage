@@ -23,7 +23,7 @@ import org.springframework.transaction.interceptor.RuleBasedTransactionAttribute
 import org.springframework.transaction.interceptor.TransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 
-@Configuration
+//@Configuration
 public class EgovConfigTransaction {
 
 	@Bean(name="txManager")

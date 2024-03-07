@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="Member")
+@Table(name="member")
 @Schema(description = "사용자 정보 VO")
 public class MemberVO {
 

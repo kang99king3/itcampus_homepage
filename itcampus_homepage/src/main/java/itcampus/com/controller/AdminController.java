@@ -1,7 +1,5 @@
 package itcampus.com.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +30,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("/login") 
+	@ResponseBody
 	public String main(@ModelAttribute MemberVO memberVO, Model model) {
 		
 		if (memberVO == null) { 
@@ -40,7 +39,9 @@ public class AdminController {
 		
 		System.out.println("------------------- 1");
 		
+	
 		MemberVO loginmemberVO = adminService.login(memberVO);
+		
 		//logger.debug("id = " + loginmemberVO.getM_id() + "::" + "pwd = " + loginmemberVO.getM_pwd());
 		System.out.println("------------------- 2");
 
@@ -52,7 +53,7 @@ public class AdminController {
 			logger.debug("ID / PW 틀림 "  + memberVO.getM_id() + ":" + memberVO.getM_pwd());
 		}
 		
-		return null;
+		return "TESt";
 	}
 	
 	@GetMapping("/aaa")
