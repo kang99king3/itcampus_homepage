@@ -7,5 +7,5 @@ import itcampus.com.vo.MemberVO;
 
 @Repository
 public interface AdminServiceRepository extends JpaRepository<MemberVO,Long>{
-    MemberVO findByM_id(String mId);
+    MemberVO findByMidAndMpwd(String mid, String mpwd);
 }

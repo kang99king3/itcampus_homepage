@@ -16,7 +16,7 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public MemberVO login(MemberVO memberVO) {
 		// TODO Auto-generated method stub
-		return adminServiceRepository.findByM_id(memberVO.getM_id());
+		return adminServiceRepository.findByMidAndMpwd(memberVO.getMid(),memberVO.getMpwd());
 		//return null;
 	}
 }

@@ -18,10 +18,10 @@
 	<div id="container">
 		<h1>CMS</h1>
 		<form action="login" method="post" th:object="${memberVO}">
-			<input type="text" name="m_id" placeholder="  ID를 입력하세요" th:field="*{m_id}"/>
-			<span th:if="${#fields.hasErrors('m_id')}" th:errors="*{m_id}"></span>
-			<input type="password" name="m_pwd" placeholder="  비밀번호를 입력하세요" th:field="*{m_pwd}"/>
-			<span th:if="${#fields.hasErrors('m_pwd')}" th:errors="*{m_pwd}"></span>
+			<input type="text" name="mid" placeholder="  ID를 입력하세요" th:field="*{mid}"/>
+			<span th:if="${#fields.hasErrors('mid')}" th:errors="*{mid}"></span>
+			<input type="password" name="mpwd" placeholder="  비밀번호를 입력하세요" th:field="*{mpwd}"/>
+			<span th:if="${#fields.hasErrors('mpwd')}" th:errors="*{mpwd}"></span>
 			<input type="submit" value="로그인"/>
 		</form> 
 	</div>

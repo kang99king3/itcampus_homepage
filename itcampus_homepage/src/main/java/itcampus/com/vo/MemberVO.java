@@ -20,30 +20,30 @@ public class MemberVO {
 	@Column(name = "M_NO")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Schema(description = "회원번호")
-	int m_no;
+	int mno;
 	
 	@Schema(description = "회원ID")
 	@Column(name="M_ID",length=20)
-	String m_id;
+	String mid;
 	
 	@Schema(description = "회원PW")
 	@Column(name="M_PWD",length=20)
-	String m_pwd;
+	String mpwd;
 	
 	@Schema(description = "회원이름")
 	@Column(name="M_NAME",length=10)
-	String m_name;
+	String mname;
 	
 	@Schema(description ="회원상태")
 	@Column(name="M_STATUS",length=1)
-	String m_status;
+	String mstatus;
 	
 	@Schema(description = "가입일")
 	@Column(name="M_JOIN_DATE",length=10)
-	String m_join_date;
+	String mjoindate;
 	
 	@Schema(description = "회원권한")
 	@Column(name="M_ROLE",length=10)
-	String m_role;
+	String mrole;
 	
 }
