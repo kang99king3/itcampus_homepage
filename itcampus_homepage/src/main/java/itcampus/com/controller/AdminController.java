@@ -1,6 +1,10 @@
 package itcampus.com.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import itcampus.com.service.AdminService;
 import itcampus.com.vo.MemberVO;
@@ -33,7 +36,6 @@ public class AdminController {
 	}
 	
 	@PostMapping("/login") 
-	@ResponseBody
 	public String main(@ModelAttribute MemberVO memberVO, Model model,HttpServletRequest request) {
 		
 		if (memberVO == null) { 
@@ -64,6 +66,33 @@ public class AdminController {
 			// alert 띄우고 // sendRedirect
 		}
 		
-		return "TESt"; // Admin Main Page
+		return "main"; // Admin Main Page
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response) throws IOException { 
+		
+        HttpSession session = request.getSession(false); // false를 사용하여 새로운 세션을 생성하지 않도록 합니다.
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        if (session != null) {
+            // 세션에서 특정 속성을 제거합니다.
+            session.removeAttribute("loginUser");
+            
+            // 세션을 무효화합니다.
+            session.invalidate();
+            
+            // 응답을 생성합니다.
+            out.println("<html><body>");
+            out.println("<scipt>alert('정상적으로 로그아웃 되었습니다 !!');</script>");
+            out.println("</body></html>");
+        } else {
+            out.println("<html><body>");
+            out.println("<scipt>alert('로그인 하세요!!');</script>");
+            out.println("</body></html>");
+        }
+		
+		return "redirect:/admin/login";
 	}
 }
