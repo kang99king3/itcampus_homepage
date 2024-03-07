@@ -1,5 +1,8 @@
 package itcampus.com.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +34,7 @@ public class AdminController {
 	
 	@PostMapping("/login") 
 	@ResponseBody
-	public String main(@ModelAttribute MemberVO memberVO, Model model) {
+	public String main(@ModelAttribute MemberVO memberVO, Model model,HttpServletRequest request) {
 		
 		if (memberVO == null) { 
 			return "redirect:admin/login";
@@ -47,19 +50,20 @@ public class AdminController {
 
 		if (loginmemberVO != null) { 
 			// session 생성 
-			logger.debug(loginmemberVO.getMname());
+			logger.info(loginmemberVO.getMname());
+			
+			// HttpSession을 생성합니다.
+	        HttpSession session = request.getSession();
+	        
+	        // 세션에 데이터를 저장합니다.
+	        session.setAttribute("loginUser", loginmemberVO.getMname());
+			
 		} else { 
 			// 로그인 fail 
-			logger.debug("ID / PW 틀림 "  + memberVO.getMid() + ":" + memberVO.getMname());
+			logger.info("ID / PW 틀림 "  + memberVO.getMid() + ":" + memberVO.getMname());
+			// alert 띄우고 // sendRedirect
 		}
 		
-		return "TESt";
+		return "TESt"; // Admin Main Page
 	}
-	
-	@GetMapping("/aaa")
-	@ResponseBody
-	public String aaa() {
-		return "afsfsdff";
-	}
-
 }
