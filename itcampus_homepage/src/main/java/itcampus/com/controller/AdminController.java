@@ -66,7 +66,7 @@ public class AdminController {
 			// alert 띄우고 // sendRedirect
 		}
 		
-		return "main"; // Admin Main Page
+		return "redirect:/admin/main"; // Admin Main Page
 	}
 	
 	@GetMapping("/logout")
@@ -94,5 +94,12 @@ public class AdminController {
         }
 		
 		return "redirect:/admin/login";
+	}
+	
+	@GetMapping("/main")
+	public String main() { 
+		System.out.println("메인화면");
+		
+		return "main";
 	}
 }
