@@ -58,7 +58,7 @@ public class AdminController {
 	        HttpSession session = request.getSession();
 	        
 	        // 세션에 데이터를 저장합니다.
-	        session.setAttribute("loginUser", loginmemberVO.getMname());
+	        session.setAttribute("loginUser", loginmemberVO);
 			
 		} else { 
 			// 로그인 fail 

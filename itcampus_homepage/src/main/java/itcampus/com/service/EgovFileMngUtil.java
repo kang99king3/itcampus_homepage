@@ -44,14 +44,14 @@ public class EgovFileMngUtil {
 
 	String storePathString = "";
 	String atchFileIdString = "";
-
+//
 	if ("".equals(storePath) || storePath == null) {
 		System.out.println("fileStorePath:"+propertyService.getString("Globals.fileStorePath"));
 	    storePathString = propertyService.getString("Globals.fileStorePath");//path를 따로 설정하지 않으면 Globals에서 가져오기
 	} else {
 	    storePathString = propertyService.getString(storePath);
 	}
-	
+//	
 	atchFileId = atchFileId.replaceAll("\\s", "");
 
 	if ("".equals(atchFileId) || atchFileId == null) {
@@ -104,15 +104,16 @@ public class EgovFileMngUtil {
 	    long _size = file.getSize();
 
 	    if (!"".equals(orginFileName)) {
-	    	filePath = storePathString + File.separator + newName;
-	    	System.out.println("FullPath = " + filePath);
+//	    	filePath = storePathString + File.separator + newName;//파일명 변환하여 사용할 경우
+	    	filePath = storePathString + File.separator + orginFileName;//원본파일명 사용할 경우
+//	    	System.out.println("FullPath = " + filePath);
 	    	file.transferTo(new File(EgovWebUtil.filePathBlackList(filePath)));
 	    }
 	    fvo = new FileVO();
 	    fvo.setFileExtsn(fileExt);
-	    fvo.setFileStreCours(storePathString);
+	    fvo.setFileStreCours(storePathString);//파일경로
 	    fvo.setFileMg(Long.toString(_size));
-	    fvo.setOrignlFileNm(orginFileName);
+	    fvo.setOrignlFileNm(orginFileName);//원본파일명
 	    fvo.setStreFileNm(newName);
 	    fvo.setAtchFileId(atchFileIdString);
 	    fvo.setFileSn(String.valueOf(fileKey));

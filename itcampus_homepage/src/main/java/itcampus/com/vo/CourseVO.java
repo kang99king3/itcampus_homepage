@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import itcampus.com.dto.CourseDto;
 import lombok.Data;
 
 @Data
@@ -64,4 +65,21 @@ public class CourseVO {
 	@ManyToOne
 	@JoinColumn(name="M_NO")
 	MemberVO membervo;
+	
+	public void setCourseVO(CourseDto courseDto) {
+		this.cid=courseDto.getCid();
+		this.ccate=courseDto.getCcate();
+		this.cname=courseDto.getCname();
+		this.csdate=courseDto.getCsdate();
+		this.cedate=courseDto.getCedate();
+		this.cnumber=courseDto.getCnumber();
+		this.cmoney=courseDto.getCmoney();
+		this.ccontent=courseDto.getCcontent();
+		this.cthumb=courseDto.getCthumb();
+		this.cuse=courseDto.getCuse();
+		
+		MemberVO memberVOObj=new MemberVO();
+		memberVOObj.setMno(courseDto.getMno());
+		this.membervo=memberVOObj;
+	}
 }
