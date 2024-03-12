@@ -2,6 +2,7 @@ package itcampus.com.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import itcampus.com.service.AdminService;
 import itcampus.com.vo.MemberVO;
+import itcampus.com.vo.QnaVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -64,6 +66,7 @@ public class AdminController {
 			// 로그인 fail 
 			logger.info("ID / PW 틀림 "  + memberVO.getMid() + ":" + memberVO.getMname());
 			// alert 띄우고 // sendRedirect
+			return "redirect:/admin/login";
 		}
 		
 		return "redirect:/admin/main"; // Admin Main Page
@@ -97,9 +100,14 @@ public class AdminController {
 	}
 	
 	@GetMapping("/main")
-	public String main() { 
+	public String main(Model model) { 
 		System.out.println("메인화면");
 		
-		return "main";
+		//상담신청현황 불러와야함.
+		
+		List<QnaVO> list =  adminService.list();
+		//System.out.println(list.toString());
+		model.addAttribute("list", list);
+		return "admin/main";
 	}
 }

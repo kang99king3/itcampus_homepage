@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import itcampus.com.controller.AdminController;
 
@@ -39,4 +40,19 @@ public class LoginInterceptor implements HandlerInterceptor {
         logger.info("-- 이미 로그인 되어 있음 : " + loginUser);
         return true; // 로그인한 경우, 컨트롤러 메소드 실행
     }
+
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		// TODO Auto-generated method stub
+		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
+	}
+
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+			throws Exception {
+		// TODO Auto-generated method stub
+		HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
+	}
+	
 }
