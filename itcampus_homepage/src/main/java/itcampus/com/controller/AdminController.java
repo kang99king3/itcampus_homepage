@@ -63,7 +63,6 @@ public class AdminController {
 	        int seconds = 60 * 60;
 	        session.setMaxInactiveInterval(seconds);
 	        
-	        
 	        // 세션에 데이터를 저장합니다.
 	        session.setAttribute("loginUser", loginmemberVO);
 			
