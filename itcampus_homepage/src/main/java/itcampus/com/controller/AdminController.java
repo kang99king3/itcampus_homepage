@@ -59,6 +59,10 @@ public class AdminController {
 			// HttpSession을 생성합니다.
 	        HttpSession session = request.getSession();
 	        
+	        // 세션의 유효 시간을 60분으로 설정
+	        int seconds = 60 * 60;
+	        session.setMaxInactiveInterval(seconds);
+	        
 	        // 세션에 데이터를 저장합니다.
 	        session.setAttribute("loginUser", loginmemberVO);
 			
