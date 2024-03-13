@@ -52,7 +52,7 @@ public class AdminCourseController {
 		return "admin/courseadd";
 	}
 	
-	//과정등록폼
+	//과정등록
 	@PostMapping("/course/add")
 	public String courseAdd(CourseDto courseDto, Model model
 			,final MultipartHttpServletRequest multiRequest) throws Exception {
@@ -76,6 +76,21 @@ public class AdminCourseController {
 		courseDto.setCthumb(cthumb);
 		adminCourseService.insertCourse(courseDto);
 		return "redirect:/admin/course";
+	}
+	
+	//과정수정폼
+	@GetMapping("/course/update")
+	public String courseUpdateForm(int cid, Model model) {
+		logger.debug("과정수정폼");
+		CourseVO cDetail= adminCourseService.courseUpdateForm(cid);
+		
+		String cthumb=cDetail.getCthumb();
+		String cthumbPath=cthumb.substring(cthumb.indexOf("/file"));
+		cDetail.setCthumb(cthumbPath);
+		
+		model.addAttribute("cDetail", cDetail);
+		System.out.println("cUpdateForm cname:"+cDetail.getCname());
+		return "admin/courseupdate";
 	}
 }
 

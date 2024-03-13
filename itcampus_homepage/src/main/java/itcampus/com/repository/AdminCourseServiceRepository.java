@@ -12,5 +12,7 @@ import itcampus.com.vo.CourseVO;
 public interface AdminCourseServiceRepository extends JpaRepository<CourseVO,Long>{
 	
 	List<CourseVO> findAll();//과정목록조회
+
+	CourseVO findByCid(int cid);//과정수정폼
 	
 }

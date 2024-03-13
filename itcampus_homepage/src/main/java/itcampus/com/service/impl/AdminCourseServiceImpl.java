@@ -29,5 +29,11 @@ public class AdminCourseServiceImpl implements AdminCourseService{
 		adminCourseServiceRepository.save(courseVO);
 	}
 
+	@Override
+	public CourseVO courseUpdateForm(int cid) {
+		
+		return adminCourseServiceRepository.findByCid(cid);
+	}
+
 	
 }
