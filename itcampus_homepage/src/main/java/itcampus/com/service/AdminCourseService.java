@@ -13,5 +13,8 @@ public interface AdminCourseService {
 
 	public CourseVO courseUpdateForm(int cid);//과정수정폼
 
-	
+	public void updateCourse(CourseDto courseDto);//과정수정하기
+
+	public void deleteCourse(int cid);//과정삭제하기
+
 }

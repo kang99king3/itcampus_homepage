@@ -141,13 +141,15 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            	<form action="/admin/course/add" method="post" enctype="multipart/form-data">
-	                                <input type="hidden" name="mno" th:value="${session.loginUser.mno}"/>
+                            	<form id="cform"  method="post" enctype="multipart/form-data">
+	                                <input type="hidden" name="cid" th:value="${cDetail.cid}"/>
 	                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 	                                    <tbody>
 	                                    	<tr>
 	                                            <th>등록자</th>
-	                                            <td th:text="${cDetail.membervo.mname}"></td>
+	                                            <td>
+	                                            	<input type="text" name="mno" th:value="${cDetail.membervo.mno}" readonly="readonly"/>
+	                                            </td>
 	                                        </tr>
 	                                        <tr>
 	                                            <th>과정명</th>
@@ -201,31 +203,33 @@
 	                                            <td>
 	                                            	<div class="row">                  
 														<div class="col-3">
-		                                            		<input type="file" accept="/file/*" class="form-control" name="thumbfile" onchange="setThumbnail(event);"/>                                           	
+															<input type="hidden" name="cthumb" th:value="${cDetail.cthumb}"/>
+		                                            		<input type="file" 
+		                                            		 accept="/file/*" class="form-control" name="cthumbfile" onchange="setThumbnail(event);"/>                                           	
 		                                            	</div>
 													</div>
 	                                            	<div id="image_container" style="padding:10px 5px;">
-	                                            		<img alt="대표이미지" th:src="${cDetail.cthumb}">
+	                                            		<img alt="대표이미지" th:src="${cDetail.cthumb}" >
 	                                            	</div>
 	                                            </td>
 	                                        </tr>
-	                                        <tr>
-	                                            <th>사용여부</th>
-	                                            <td>
-	                                            	<div class="row">                  
-													    <div class="col-1">
-		                                            	<select name="cuse" class="form-control" required="required">
-		                                            		<option value="Y" th:selected="${cDetail.cuse=='Y'}">Y</option>
-		                                            		<option value="N" th:selected="${cDetail.cuse=='N'}">N</option>
-		                                            	</select>  
-													    </div>
-													</div>
-	                                            </td>
-	                                        </tr>
+<!-- 	                                        <tr> -->
+<!-- 	                                            <th>사용여부</th> -->
+<!-- 	                                            <td> -->
+<!-- 	                                            	<div class="row">                   -->
+<!-- 													    <div class="col-1"> -->
+<!-- 		                                            	<select name="cuse" class="form-control" required="required"> -->
+<!-- 		                                            		<option value="Y" th:selected="${cDetail.cuse=='Y'}">Y</option> -->
+<!-- 		                                            		<option value="N" th:selected="${cDetail.cuse=='N'}">N</option> -->
+<!-- 		                                            	</select>   -->
+<!-- 													    </div> -->
+<!-- 													</div> -->
+<!-- 	                                            </td> -->
+<!-- 	                                        </tr> -->
 	                                        <tr>
 	                                        	<td colspan="2">
 	                                        		<span class="float-right">
-													    <button class="btn btn-primary " id="update" type="button" style="width:100px;">수정</button>
+													    <button class="btn btn-primary " id="update" type="submit" style="width:100px;">수정</button>
 													    <button class="btn btn-primary " id="delete" type="button" style="width:100px;">삭제</button>
 													    <button class="btn btn-primary " id="copy"   type="button" style="width:100px;">복사</button>                                        	
 	                                        		</span>
@@ -326,7 +330,6 @@
 		        while (container.firstChild) {
 		            container.removeChild(container.firstChild);
 		        }
-		
 		        // 새로운 이미지 추가
 		        container.appendChild(img);
 		    };
@@ -337,10 +340,16 @@
         //수정,삭제,복사에대한 form 요청 URL 적용
         $(function(){
         	$("#update").click(function(){
-        		alert("서비스 예정입니다.");
+        		if(confirm("수정하시겠습니까?")){
+	        		var $cForm=$("#cform");
+	        		$cForm.attr("action","/admin/course/update");
+	        		document.getElementById("cform").submit();        			
+        		}
         	});
         	$("#delete").click(function(){
-        		alert("서비스 예정입니다.");
+        		if(confirm("정말 삭제하시겠습니까?")){
+        			location.href="/admin/course/delete?cid=[[${cDetail.cid}]]";
+        		}
         	});
         	$("#copy").click(function(){
         		alert("서비스 예정입니다.");

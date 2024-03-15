@@ -54,11 +54,11 @@ public class EgovFileMngUtil {
 //	
 	atchFileId = atchFileId.replaceAll("\\s", "");
 
-	if ("".equals(atchFileId) || atchFileId == null) {
-	    atchFileIdString = idgenService.getNextStringId();
-	} else {
-	    atchFileIdString = atchFileId;
-	}
+//	if ("".equals(atchFileId) || atchFileId == null) {
+//	    atchFileIdString = idgenService.getNextStringId();
+//	} else {
+//	    atchFileIdString = atchFileId;
+//	}
 
 	File saveFolder = new File(EgovWebUtil.filePathBlackList(storePathString));
 	System.out.println("saveFoler.exists:"+!saveFolder.exists());
@@ -100,12 +100,13 @@ public class EgovFileMngUtil {
 		int index = orginFileName.lastIndexOf(".");
 	    //String fileName = orginFileName.substring(0, index);
 	    String fileExt = orginFileName.substring(index + 1);//파일확장자 추출
-	    String newName = KeyStr + EgovStringUtil.getTimeStamp() + fileKey+"."+fileExt;//새로운 파일명 생성
+//	    String newName = KeyStr + EgovStringUtil.getTimeStamp() + fileKey+"."+fileExt;//새로운 파일명 생성
+	    String newName = KeyStr+EgovStringUtil.getTimeStamp()+"_"+orginFileName;
 	    long _size = file.getSize();
 
 	    if (!"".equals(orginFileName)) {
 //	    	filePath = storePathString + File.separator + newName;//파일명 변환하여 사용할 경우
-	    	filePath = storePathString + File.separator + orginFileName;//원본파일명 사용할 경우
+	    	filePath = storePathString + File.separator +newName;//원본파일명 사용할 경우
 //	    	System.out.println("FullPath = " + filePath);
 	    	file.transferTo(new File(EgovWebUtil.filePathBlackList(filePath)));
 	    }
@@ -114,7 +115,7 @@ public class EgovFileMngUtil {
 	    fvo.setFileStreCours(storePathString);//파일경로
 	    fvo.setFileMg(Long.toString(_size));
 	    fvo.setOrignlFileNm(orginFileName);//원본파일명
-	    fvo.setStreFileNm(newName);
+	    fvo.setStreFileNm(newName);//새파일명
 	    fvo.setAtchFileId(atchFileIdString);
 	    fvo.setFileSn(String.valueOf(fileKey));
 

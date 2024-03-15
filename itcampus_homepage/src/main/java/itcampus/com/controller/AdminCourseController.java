@@ -1,5 +1,6 @@
 package itcampus.com.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -54,27 +56,23 @@ public class AdminCourseController {
 	
 	//과정등록
 	@PostMapping("/course/add")
-	public String courseAdd(CourseDto courseDto, Model model
-			,final MultipartHttpServletRequest multiRequest) throws Exception {
+	public String courseAdd( MultipartHttpServletRequest multiRequest
+							,CourseDto courseDto) throws Exception {
 		logger.debug("과정등록");
 		logger.debug("courseDto param:"+courseDto);//입력폼에서 전달된 파라미터를 dto객체로 받음
 		
 		List<FileVO> result=null;//업로드된 파일의 정보를 저장
-		String atchFileId = "";
 		
-//		this.sampleService.insertSample(sampleVO);//게시글 DB에 추가 요청
-
 		final Map<String, MultipartFile> files = multiRequest.getFileMap();
-		System.out.println("file:"+files.get("thumbfile").getName());
-		if (!files.isEmpty()) {
-//			Map<String, MultipartFile> files, String KeyStr, int fileKeyParam, String atchFileId, String storePath
-			result=fileUtil.parseFileInf(files, "BBS_", 0, courseDto.getCid()+"", "");
-//			atchFileId = fileMngService.insertFileInfs(result);
+		System.out.println("file:"+files.get("cthumbfile").getOriginalFilename());
+		if (files.get("cthumbfile").getOriginalFilename()!="") {
+			result=fileUtil.parseFileInf(files, "COS_", 0, "", "");
+			String cthumb = result.get(0).getFileStreCours()+"/"+result.get(0).getStreFileNm();
+			courseDto.setCthumb(cthumb);
 		}
 		
-		String cthumb = result.get(0).getFileStreCours()+"/"+result.get(0).getOrignlFileNm();
-		courseDto.setCthumb(cthumb);
 		adminCourseService.insertCourse(courseDto);
+		
 		return "redirect:/admin/course";
 	}
 	
@@ -91,6 +89,44 @@ public class AdminCourseController {
 		model.addAttribute("cDetail", cDetail);
 		System.out.println("cUpdateForm cname:"+cDetail.getCname());
 		return "admin/courseupdate";
+	}
+	
+	//과정수정하기
+	@PostMapping("/course/update")
+	public String courseUpdate(CourseDto courseDto, Model model
+			,final MultipartHttpServletRequest multiRequest) throws Exception {
+		logger.info("과정수정하기");
+		logger.info("courseDto:"+courseDto);
+		List<FileVO> result=null;//업로드된 파일의 정보를 저장
+
+		final Map<String, MultipartFile> files = multiRequest.getFileMap();
+
+		if(files.get("cthumbfile").getOriginalFilename()!="") {
+			System.out.println("업로드된 파일이 있는경우");
+			//업로드를 실행하고 업로드 파일정보를 반환
+			result=fileUtil.parseFileInf(files, "COS_", 0, "", "");
+			
+			//기존 파일 삭제
+			String oldName=courseDto.getCthumb().substring(courseDto.getCthumb().lastIndexOf("/"));
+			File oldFile=new File(result.get(0).getFileStreCours()+oldName);
+			oldFile.delete();
+			
+			//업로드 파일 정보 저장
+			String cthumb = result.get(0).getFileStreCours()+"/"+result.get(0).getStreFileNm();
+			courseDto.setCthumb(cthumb);//이미지를 수정하면 수정경로를 저장,수정이 없으면 기존 경로를 사용
+		}
+		
+		//과정정보 수정
+		adminCourseService.updateCourse(courseDto);
+		return "redirect:/admin/course/update?cid="+courseDto.getCid();
+	}
+	
+	//과정삭제하기
+	@GetMapping("/course/delete")
+	public String courseDelete(int cid,Model model) throws Exception {
+		logger.info("과정삭제하기");
+		adminCourseService.deleteCourse(cid);
+		return "redirect:/admin/course";
 	}
 }
 

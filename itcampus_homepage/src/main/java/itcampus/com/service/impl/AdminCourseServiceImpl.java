@@ -18,7 +18,7 @@ public class AdminCourseServiceImpl implements AdminCourseService{
 	
 	@Override
 	public List<CourseVO> courseList() {
-		List<CourseVO> list= adminCourseServiceRepository.findAll();
+		List<CourseVO> list= adminCourseServiceRepository.findByCuse("Y");
 		return list;
 	}
 
@@ -31,8 +31,22 @@ public class AdminCourseServiceImpl implements AdminCourseService{
 
 	@Override
 	public CourseVO courseUpdateForm(int cid) {
-		
 		return adminCourseServiceRepository.findByCid(cid);
+	}
+
+	@Override
+	public void updateCourse(CourseDto courseDto) {
+		CourseVO courseVO=new CourseVO();
+		courseVO.setCourseVO(courseDto);
+		adminCourseServiceRepository.save(courseVO);
+	}
+
+	@Override
+	public void deleteCourse(int cid) {
+//		adminCourseServiceRepository.deleteByCid(cid);
+		 CourseVO courseVO = adminCourseServiceRepository.findByCid(cid);
+		 courseVO.setCuse("N");
+		 adminCourseServiceRepository.save(courseVO);
 	}
 
 	
