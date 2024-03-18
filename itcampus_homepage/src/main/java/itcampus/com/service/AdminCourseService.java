@@ -17,4 +17,6 @@ public interface AdminCourseService {
 
 	public void deleteCourse(int cid);//과정삭제하기
 
+	public void copyCourse(int cid);//과정복사하기
+
 }

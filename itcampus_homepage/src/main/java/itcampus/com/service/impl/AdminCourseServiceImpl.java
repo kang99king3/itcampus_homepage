@@ -49,5 +49,12 @@ public class AdminCourseServiceImpl implements AdminCourseService{
 		 adminCourseServiceRepository.save(courseVO);
 	}
 
+	@Override
+	public void copyCourse(int cid) {
+		CourseVO courseVO = adminCourseServiceRepository.findByCid(cid);
+		courseVO.setCid(0);
+		adminCourseServiceRepository.save(courseVO);
+	}
+
 	
 }

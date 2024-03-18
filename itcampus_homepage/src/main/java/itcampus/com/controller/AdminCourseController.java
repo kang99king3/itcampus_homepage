@@ -128,6 +128,14 @@ public class AdminCourseController {
 		adminCourseService.deleteCourse(cid);
 		return "redirect:/admin/course";
 	}
+	
+	//과정복사하기
+	@GetMapping("/course/copy")
+	public String courseCopy(int cid,Model model) throws Exception {
+		logger.info("과정복사하기");
+		adminCourseService.copyCourse(cid);
+		return "redirect:/admin/course";
+	}
 }
 
 
