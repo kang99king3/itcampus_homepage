@@ -13,7 +13,9 @@ public class EgovConfigProperties {
 
 	@Value("${Globals.fileStorePath}")
 	private String fileStorePath;
-
+	@Value("${Globals.fileStorePathMac}")
+	private String fileStorePathMac;
+	
 	@Value("${Globals.addedOptions}")
 	private String addedOptions;
 
@@ -30,7 +32,16 @@ public class EgovConfigProperties {
 		properties.put("pageUnit", "10");
 		properties.put("pageSize", "10");
 		properties.put("Globals.posblAtchFileSize", posblAtchFileSize);
-		properties.put("Globals.fileStorePath", fileStorePath);
+		
+		//MAC과 아닌것을 구분한다.
+		String osName = System.getProperty("os.name");
+		if (osName.toLowerCase().contains("mac")) { 
+			// mac 일때 
+			properties.put("Globals.fileStorePath", fileStorePathMac);
+		} else { 
+			// 윈도우 일때 
+			properties.put("Globals.fileStorePath", fileStorePath);
+		}
 		properties.put("Globals.addedOptions", addedOptions);
 		
 		EgovPropertyServiceImpl egovPropertyServiceImpl = new EgovPropertyServiceImpl();
