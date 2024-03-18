@@ -25,6 +25,7 @@ def check_root():
 def restart_application():
     try:
         # 백그라운드에서 실행하는 명령어
+        # 실제 위치는 나중에 변경해야 함 
         subprocess.Popen(["java", "-jar", "/Users/kwak/git/itcampus_homepage/itcampus_homepage/target/itcampus_homepage-4.2.0.jar"])
         print("Command executed in background!")
     except Exception as e:
