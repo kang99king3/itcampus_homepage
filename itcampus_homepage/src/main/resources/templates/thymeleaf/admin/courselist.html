@@ -133,7 +133,7 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">과정목록</h1>
-					  <div class="card shadow mb-4">
+					<div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Course List</h6>
                         </div>
@@ -177,7 +177,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; itcampus.hankyung.com 2020</span>
                     </div>
                 </div>
             </footer>
@@ -229,7 +229,19 @@
     <script src="/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="/bootstrap/js/demo/datatables-demo.js"></script>
+<!--     <script src="/bootstrap/js/demo/datatables-demo.js"></script> -->
+	<script type="text/javascript">
+		//dataTable 설정
+		$(function(){
+			$("#dataTable").DataTable({
+				"paging":true,
+				"searching":true,
+				"ordering":true,
+				"responsive":true
+			});			
+		});
+	</script>
+
 </body>
 
 </html>

@@ -24,8 +24,16 @@
     <script type="text/javascript" th:src="@{/html/egovframework/com/cmm/utl/ckeditor/ckeditor.js?t=B37D54V}" ></script>
  
     <!-- Custom styles for this page -->
-<!--     <link href="/bootstrap/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"> -->
+    <link href="/bootstrap/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+	<style type="text/css">
+		
+		#dataTable tr>td:nth-child(2):hover {
+			cursor: pointer;
+			color:blue;
+			font-weight: bold;	
+		}
+	</style>
 </head>
 
 <body id="page-top">
@@ -134,87 +142,39 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">과정등록</h1>
+                    <h1 class="h3 mb-4 text-gray-800">후기등록</h1>
 					  <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Course</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Post Course</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            	<form action="/admin/course/add" method="post" enctype="multipart/form-data">
+                            	<form id="postcourseAddForm" action="/admin/postcourse/add" method="post" onsubmit="addcheck()">
 	                                <input type="hidden" name="mno" th:value="${session.loginUser.mno}"/>
-	                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	                                <table class="table table-bordered"  width="100%" cellspacing="0">
 	                                    <tbody>
 	                                        <tr>
 	                                            <th>과정명</th>
-	                                            <td><input type="text" class="form-control" name="cname" required="required" /></td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>카테고리</th>
-	                                            <td>
-	                                            	<div class="row">                  
-													    <div class="col-2">
-		                                            	<select name="ccate" class="form-control" required="required">
-		                                             		<option value="KDT-1">신기술</option>
-		                                            		<option value="KDT-2">선도기업</option>
-		                                            		<option value="KDT-3">KDT기타</option>
-		                                            		<option value="NTL-1">국가기간전략</option>
-		                                            	</select>  
+	                                            <td>	
+	                                            	<div class="row mb-3">
+													    <div class="col-11">
+													    	<input type="hidden" class="form-control" name="cid"/>
+													        <input type="text" class="form-control" name="cname" placeholder="검색하여 입력" readonly="readonly">
+													    </div>
+													    <div class="col-auto">
+													        <button type="button" id="c_search" class="btn btn-primary" data-toggle="modal" data-target="#searchCourseModal">검색</button>
+													    </div>
+													</div>
+													<div class="row mb-3">    
+													    <div class="col-11">
+													        <input type="text" class="form-control" name="ptitle" placeholder="직접입력">
 													    </div>
 													</div>
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
-	                                            <th>교육기간</th>
-	                                            <td>
-		                                            <div class="row">
-													    <span class="input-group-text bg-transparent border-0" >시작일:</span>                                             
-													    <div class="col-2">
-													        <input type="date" class="form-control" name="csdate"required="required">
-													    </div>
-													    <span class="input-group-text bg-transparent border-0">~</span>
-													    <span class="input-group-text bg-transparent border-0" >종료일:</span>   
-													    <div class="col-2">
-													        <input type="date" class="form-control" name="cedate" required="required">
-													    </div>
-													</div>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>모집인원</th>
-	                                            <td><input type="number" class="form-control" name="cnumber" required="required"/></td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>훈련수당</th>
-	                                            <td><input type="text" class="form-control" name="cmoney" required="required"/></td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>과정상세</th>
-	                                            <td><textarea id="description" name="ccontent" required="required"></textarea></td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>대표이미지</th>
-	                                            <td>
-	                                            	<div class="row">                  
-														<div class="col-3">
-		                                            		<input type="file" accept="/file/*" class="form-control" name="cthumbfile" onchange="setThumbnail(event);"/>                                           	
-		                                            	</div>
-													</div>
-	                                            	<div id="image_container" style="padding:10px 5px;"></div>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>사용여부</th>
-	                                            <td>
-	                                            	<div class="row">                  
-													    <div class="col-1">
-		                                            	<select name="cuse" class="form-control" required="required">
-		                                            		<option value="Y">Y</option>
-		                                            		<option value="N">N</option>
-		                                            	</select>  
-													    </div>
-													</div>
-	                                            </td>
+	                                        	<th>후기</th>
+	                                        	<td><textarea id="description" name="ccontent" required="required"></textarea></td>
 	                                        </tr>
 	                                        <tr>
 	                                        	<td colspan="2">
@@ -273,7 +233,39 @@
             </div>
         </div>
     </div>
-
+    
+	<!-- popup modal -->
+	<div class="modal fade" id="searchCourseModal" tabindex="-1" role="dialog" aria-labelledby="searchCourseModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <!-- 모달 헤더 -->
+	      <div class="modal-header">
+		        <h5 class="modal-title" id="searchCourseModalLabel">모달 제목</h5>
+		        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <!-- 모달 내용 -->
+	      <div class="modal-body">
+	       <!-- DataTable -->
+		        <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
+		          <thead>
+		            <tr>
+		              <th style="width:20%;">과정코드</th>
+		              <th style="width:80%;">과정명</th>
+		            </tr>
+		          </thead>
+		          <tbody>
+		            <!-- Data will be loaded dynamically here -->
+		          </tbody>
+		        </table>
+	      </div>
+	      <!-- 모달 푸터 -->
+	      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
     <!-- Bootstrap core JavaScript-->
     <script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
     <script src="/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -285,11 +277,8 @@
     <script src="/bootstrap/js/sb-admin-2.min.js"></script>
     
  	<!-- Page level plugins -->
-<!--     <script src="/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script> -->
-<!--     <script src="/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
-
-    <!-- Page level custom scripts -->
-<!--     <script src="/bootstrap/js/demo/datatables-demo.js"></script> -->
+    <script src="/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     
     <!-- CKEditor를 초기화하는 스크립트 -->
     <script>
@@ -323,6 +312,50 @@
 		
 		    reader.readAsDataURL(event.target.files[0]);
 		}
+        
+        //모달창에 과정명 검색
+		$(document).ready(function() {
+ 	        $('#searchCourseModal').on('shown.bs.modal', function () {
+
+ 		        $('#dataTable').DataTable({
+		            "ajax": {
+		                "url": "/admin/postcourse/search",
+		                "method": "GET",
+		                "dataSrc": "clist"
+		            },
+		            "columns": [
+		                { "data": "cid" }, // 예시: CourseVO의 cid 필드
+		                { "data": "cname" }, // 예시: CourseVO의 cname 필드
+		                // 추가 필드들에 대한 정의
+		            ]
+		        }); 
+			});
+		
+		    $('#searchCourseModal').on('hidden.bs.modal', function () {
+		        // Destroy DataTable when modal is closed
+		        $('#dataTable').DataTable().destroy();
+		    });
+		    
+		    //모달창에 원하는 과정명 선택하여 입력
+		    $("#dataTable").on("click","tr>td:nth-child(2)",function(){
+		    	var cname_sel=$(this).text();
+		    	var cid_sel=$(this).prev("td").text();
+		    	$("input[name=cname]").val(cname_sel);
+		    	$("input[name=cid]").val(cid_sel);
+		    	$("#searchCourseModal .modal-footer > button").trigger("click");
+		    })
+		
+		    $("#postcourseAddForm").submit(function(){
+		    	var cname_sel=$("input[name=cname]").val();
+		    	var ptitle_sel=$("input[name=ptitle]").val();
+		    	if(cname_sel==""&&ptitle_sel==""){
+// 		    		$("input[name=ptitle]").after("<span>과정명은 '검색' 또는 '직접작성' 중 하나는 반드시 작성해야 합니다.</span>");
+		    		alert("둘중하나작성");							   
+		    		return false;
+		    	}
+		    });
+		});
+        
     </script>
 </body>
 
