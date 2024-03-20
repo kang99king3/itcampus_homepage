@@ -148,14 +148,14 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">후기등록</h1>
+                    <h1 class="h3 mb-4 text-gray-800">후기상세내용</h1>
 					  <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Post Course</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Post Course View</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            	<form id="postcourseAddForm" action="/admin/postcourse/add" method="post" onsubmit="addcheck()">
+                            	<form id="postcourseUpdateForm"  method="post" onsubmit="addcheck()">
 	                                <input type="hidden" name="mno" th:value="${session.loginUser.mno}"/>
 	                                <table class="table table-bordered"  width="100%" cellspacing="0">
 	                                    <tbody>
@@ -164,7 +164,7 @@
 	                                    		<td>
 	                                    			<div class="row mb-3">
 			                                    		<div class="col-2">
-			                                    			<input type="date" class="form-control" name="pregdate" required="required"/>  
+			                                    			<input type="date" class="form-control" name="pregdate" th:value="${pDetail.pregdate}" required="required"/>  
 			                                    		</div>
 		                                    		</div>
 	                                    		</td>
@@ -175,15 +175,15 @@
 	                                            	<div class="row mb-3">
 	                                            		<div class="col-2">
 		                                            		<select name="course_sel" class="form-control">
-		                                            			<option value="a">---검색입력---</option>
-		                                            			<option value="b">---직접입력---</option>
+		                                            			<option value="a" th:selected="${pDetail.coursevo == null ? '' : 'selected'}">---검색입력---</option>
+		                                            			<option value="b" th:selected="${pDetail.coursevo == null ? 'selected': ''}">---직접입력---</option>
 		                                            		</select>
 	                                            		</div>
 	                                            	</div>
 	                                            	<div class="row mb-3 a">
 													    <div class="col-11">
-													    	<input type="hidden" class="form-control" name="cid" />
-													        <input type="text" class="form-control" name="cname" placeholder="검색하여 입력" readonly="readonly">
+													    	<input type="hidden" class="form-control" name="cid" th:value="${pDetail.coursevo == null ? '':pDetail.coursevo.cid}"/>
+													        <input type="text" class="form-control" name="cname" th:value="${pDetail.coursevo == null ? '':pDetail.coursevo.cname}" placeholder="검색하여 입력" readonly="readonly">
 													    </div>
 													    <div class="col-auto">
 													        <button type="button" id="c_search" class="btn btn-primary" data-toggle="modal" data-target="#searchCourseModal">검색</button>
@@ -191,7 +191,7 @@
 													</div>
 													<div class="row mb-3 b">    
 													    <div class="col-11">
-													        <input type="text" class="form-control"name="ptitle" placeholder="직접입력">
+													        <input type="text" class="form-control"name="ptitle" th:value="${pDetail.ptitle}" placeholder="직접입력">
 													    </div>
 													</div> 
 	                                            </td>
@@ -199,24 +199,14 @@
 	                                        <tr>
 	                                        	<th>후기</th>
 <!-- 	                                        	<td><textarea id="description" name="pcontent" required="required"></textarea></td> -->
-	                                        	<td><textarea cols="60" rows="10" name="pcontent"class="form-control" required="required"></textarea></td>
+	                                        	<td><textarea cols="60" rows="10" name="pcontent"class="form-control" required="required" th:text="${pDetail.pcontent}"></textarea></td>
 	                                        </tr>
 	                                        <tr>
-	                                            <th>사용여부</th>
-	                                            <td>
-	                                            	<div class="row">                  
-													    <div class="col-1">
-		                                            	<select name="puse" class="form-control" required="required">
-		                                            		<option value="Y">Y</option>
-		                                            		<option value="N">N</option>
-		                                            	</select>  
-													    </div>
-													</div>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td colspan="2">
-												    <button class="btn btn-primary float-right" type="submit" style="width:100px;">등록</button>                                        	
+	                                        	<td colspan="2">      
+											      <button class="btn btn-primary" id="list" type="button" style="width:100px;">목록</button>
+												   <button class="btn btn-primary" id="update" type="button" style="width:100px;">수정</button>
+												   <button class="btn btn-primary" id="delete" type="button" style="width:100px;">삭제</button>
+												   <button class="btn btn-primary" id="copy"   type="button" style="width:100px;">복사</button>                                          	
 												</td>
 	                                        </tr>
 	                                    </tbody>
@@ -383,7 +373,7 @@
 		    	$("#searchCourseModal .modal-footer > button").trigger("click");
 		    })
 		
-		    $("#postcourseAddForm").submit(function(){
+		    $("#postcourseUpdateForm").submit(function(){
 		    	var cname_sel=$("input[name=cname]").val();
 		    	var ptitle_sel=$("input[name=ptitle]").val();
 		    	if((cname_sel==""&&ptitle_sel=="")){
@@ -406,9 +396,19 @@
 		    		$(".a input[name=cid]").attr("disabled","disabled").val("");//비활성화
 		    		$(".a input[name=cname]").val("");
 		    	}
-		    });
+		    }); 
+		    
+		    //처음 실행될때 보여줄 과정명
+		    if($("select[name=course_sel]").val()=="a"){
+		    	$(".a").show();
+	    		$(".b").hide();
+		    }else{
+		    	$(".b").show();
+	    		$(".a").hide();
+		    }
+		    
 		});
-        
+      
     </script>
 </body>
 

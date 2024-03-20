@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import itcampus.com.dto.PostCourseDto;
 import itcampus.com.service.AdminCourseService;
 import itcampus.com.service.AdminPostCourseService;
 import itcampus.com.service.impl.AdminPostCourseServiceImpl;
@@ -48,7 +50,8 @@ public class AdminPostCourseController {
 		return "admin/postcourseadd";
 	}
 	
-	//과정목록
+	//후기등록
+	//1.후기등록시 과정목록 검색
 	@ResponseBody
 	@GetMapping("/postcourse/search")
 	public Map<String,List<CourseVO>> courseList(Model model) {
@@ -59,6 +62,25 @@ public class AdminPostCourseController {
 		map.put("clist", cList);
 		System.out.println("cList size:"+cList.size());
 		return map;
+	}
+	
+	//후기등록
+	//2.후기등록하기
+	@PostMapping("/postcourse/add")
+	public String postCourseAdd(PostCourseDto postCourseDto, Model model) {
+		logger.debug("후기등록");
+		adminPostCourseService.insertPostCourse(postCourseDto);
+		return "redirect:/admin/postcourse";
+	}
+	
+	//후기상세보기
+	@GetMapping("/postcourse/view")
+	public String postCourse(int pid, Model model) {
+		logger.debug("후기상세보기");
+		PostCourseVO pDetail = adminPostCourseService.postCourseView(pid);
+		model.addAttribute("pDetail", pDetail);
+		
+		return "admin/postcourseview";
 	}
 }
 

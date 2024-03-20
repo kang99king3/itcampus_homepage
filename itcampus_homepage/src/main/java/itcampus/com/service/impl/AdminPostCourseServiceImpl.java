@@ -23,16 +23,16 @@ public class AdminPostCourseServiceImpl implements AdminPostCourseService{
 
 	@Override
 	public void insertPostCourse(PostCourseDto postcourseDto) {
-		// TODO Auto-generated method stub
-		
+		PostCourseVO postCourseVO=new PostCourseVO();
+		postCourseVO.setCourseVO(postcourseDto);
+		adminPostCourseServiceRepository.save(postCourseVO);
 	}
 
 	@Override
-	public PostCourseVO postCourseUpdateForm(int pid) {
-		// TODO Auto-generated method stub
-		return null;
+	public PostCourseVO postCourseView(int pid) {
+		return adminPostCourseServiceRepository.findByPid(pid);
 	}
-
+	
 	@Override
 	public void updatePostCourse(PostCourseDto postcourseDto) {
 		// TODO Auto-generated method stub
@@ -44,5 +44,6 @@ public class AdminPostCourseServiceImpl implements AdminPostCourseService{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

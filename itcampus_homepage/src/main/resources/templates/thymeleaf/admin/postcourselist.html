@@ -156,7 +156,7 @@
 	                                    	<tr th:each="item, stat : ${plist}">
 		                                        <td th:text="${stat.index + 1}"></td>
 												<td>
-													<a th:href="@{/admin/postcourse/update(pid=${item.pid})}" 
+													<a th:href="@{/admin/postcourse/view(pid=${item.pid})}" 
 												       th:text="${item.coursevo != null ? item.coursevo.cname : item.ptitle}">
 												    </a>
 												</td>

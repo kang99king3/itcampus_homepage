@@ -10,9 +10,11 @@ public interface AdminPostCourseService {
 
 	public void insertPostCourse(PostCourseDto postcourseDto);//후기등록
 
-	public PostCourseVO postCourseUpdateForm(int pid);//후기수정폼
+	public PostCourseVO postCourseView(int pid);//과정후기상세보기	
 
 	public void updatePostCourse(PostCourseDto postcourseDto);//후기수정하기
 
 	public void deletePostCourse(int pid);//후기삭제하기
+
+
 }

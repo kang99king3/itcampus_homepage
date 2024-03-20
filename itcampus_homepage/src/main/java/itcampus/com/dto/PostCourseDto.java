@@ -22,4 +22,6 @@ public class PostCourseDto {
 	private String pregdate;
 	
 	private int mno;
+	
+	private String puse;
 }
