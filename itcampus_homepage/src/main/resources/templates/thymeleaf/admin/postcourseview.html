@@ -11,7 +11,7 @@
 
     <title>과정등록</title>
 
-    <!-- Custom fonts for this template-->
+    <!-- Custom fonts for this template -->
     <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -155,8 +155,10 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            	<form id="postcourseUpdateForm"  method="post" onsubmit="addcheck()">
+                            	<form id="postcourseUpdateForm"  method="post">
+	                                <input type="hidden" name="pid" th:value="${pDetail.pid}"/>
 	                                <input type="hidden" name="mno" th:value="${session.loginUser.mno}"/>
+	                                <input type="hidden" name="puse" th:value="${pDetail.puse}"/>
 	                                <table class="table table-bordered"  width="100%" cellspacing="0">
 	                                    <tbody>
 	                                    	<tr>
@@ -175,8 +177,8 @@
 	                                            	<div class="row mb-3">
 	                                            		<div class="col-2">
 		                                            		<select name="course_sel" class="form-control">
-		                                            			<option value="a" th:selected="${pDetail.coursevo == null ? '' : 'selected'}">---검색입력---</option>
-		                                            			<option value="b" th:selected="${pDetail.coursevo == null ? 'selected': ''}">---직접입력---</option>
+		                                            			<option value="a" th:selected="${pDetail.coursevo != null}">---검색입력---</option>
+		                                            			<option value="b" th:selected="${pDetail.coursevo == null}">---직접입력---</option>
 		                                            		</select>
 	                                            		</div>
 	                                            	</div>
@@ -203,10 +205,11 @@
 	                                        </tr>
 	                                        <tr>
 	                                        	<td colspan="2">      
-											      <button class="btn btn-primary" id="list" type="button" style="width:100px;">목록</button>
-												   <button class="btn btn-primary" id="update" type="button" style="width:100px;">수정</button>
-												   <button class="btn btn-primary" id="delete" type="button" style="width:100px;">삭제</button>
-												   <button class="btn btn-primary" id="copy"   type="button" style="width:100px;">복사</button>                                          	
+	                                        		<span class="float-right">
+												       <button class="btn btn-primary" id="list" type="button" style="width:100px;">목록</button>
+													   <button class="btn btn-primary" id="update" type="button" style="width:100px;">수정</button>
+													   <button class="btn btn-primary" id="delete" type="button" style="width:100px;">삭제</button>                                     	
+													</span>
 												</td>
 	                                        </tr>
 	                                    </tbody>
@@ -373,6 +376,7 @@
 		    	$("#searchCourseModal .modal-footer > button").trigger("click");
 		    })
 		
+		    //과정명 작성시 유효값처리
 		    $("#postcourseUpdateForm").submit(function(){
 		    	var cname_sel=$("input[name=cname]").val();
 		    	var ptitle_sel=$("input[name=ptitle]").val();
@@ -383,18 +387,19 @@
 		    	}
 		    });
 		    
+		    //과정입력방법 선택시 처리 코드
 		    $("select[name=course_sel]").change(function(){
 		    	if($(this).val()=="a"){
 		    		$(".a").show();
-		    		$(".a input[name=cid]").attr("disabled","");//활성화
+		    		$(".a input[name=cid]").removeAttr("disabled");//활성화
 		    		
 		    		$(".b").hide();
-		    		$(".b input[name=ptitle]").val("");//값 초기화
+		    		//$(".b input[name=ptitle]").val("");//값 초기화
 		    	}else{
 		    		$(".b").show();
 		    		$(".a").hide();
-		    		$(".a input[name=cid]").attr("disabled","disabled").val("");//비활성화
-		    		$(".a input[name=cname]").val("");
+		    		$(".a input[name=cid]").attr("disabled","disabled");//비활성화
+		    		//$(".a input[name=cname]").val("");
 		    	}
 		    }); 
 		    
@@ -406,6 +411,23 @@
 		    	$(".b").show();
 	    		$(".a").hide();
 		    }
+		    
+		    //목록,수정,삭제에 대한 버튼 요청 처리
+		    $("#list").click(function(){     			
+        		location.href="/admin/postcourse";
+        	});
+        	$("#update").click(function(){
+        		if(confirm("수정하시겠습니까?")){
+	        		var $pForm=$("#postcourseUpdateForm");
+	        		$pForm.attr("action","/admin/postcourse/update");
+	        		document.getElementById("postcourseUpdateForm").submit();        			
+        		}
+        	});
+        	$("#delete").click(function(){
+        		if(confirm("정말 삭제하시겠습니까?")){
+        			location.href="/admin/postcourse/delete?pid=[[${pDetail.pid}]]";
+        		}
+        	});
 		    
 		});
       

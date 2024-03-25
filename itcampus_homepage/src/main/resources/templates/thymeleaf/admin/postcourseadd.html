@@ -172,12 +172,15 @@
 	                                        <tr>
 	                                            <th>과정명</th>
 	                                            <td>	
-	                                            	<div class="row mb-3">
+	                                            	<div class="row mb-3 align-items-end">
 	                                            		<div class="col-2">
 		                                            		<select name="course_sel" class="form-control">
 		                                            			<option value="a">---검색입력---</option>
 		                                            			<option value="b">---직접입력---</option>
 		                                            		</select>
+	                                            		</div>
+	                                            		<div class="col-auto">
+	                                            			<small style="color:red;">검색하거나 직접 입력하려면 선택해 주세요</small>
 	                                            		</div>
 	                                            	</div>
 	                                            	<div class="row mb-3 a">
@@ -388,7 +391,8 @@
 		    	var ptitle_sel=$("input[name=ptitle]").val();
 		    	if((cname_sel==""&&ptitle_sel=="")){
 // 		    		$("input[name=ptitle]").after("<span>과정명은 '검색' 또는 '직접작성' 중 하나는 반드시 작성해야 합니다.</span>");
-		    		alert("반드시 하나는 작성");	
+		    		alert("과정명을 작성하세요");	
+		    		$("select[name=course_sel]").focus();
 		    		return false;
 		    	}
 		    });

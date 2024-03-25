@@ -76,10 +76,10 @@ public class AdminCourseController {
 		return "redirect:/admin/course";
 	}
 	
-	//과정수정폼
-	@GetMapping("/course/update")
+	//과정상세보기
+	@GetMapping("/course/view")
 	public String courseUpdateForm(int cid, Model model) {
-		logger.debug("과정수정폼");
+		logger.debug("과정상세보기");
 		CourseVO cDetail= adminCourseService.courseUpdateForm(cid);
 		
 		String cthumb=cDetail.getCthumb();
@@ -88,7 +88,7 @@ public class AdminCourseController {
 		
 		model.addAttribute("cDetail", cDetail);
 		System.out.println("cUpdateForm cname:"+cDetail.getCname());
-		return "admin/courseupdate";
+		return "admin/courseview";
 	}
 	
 	//과정수정하기
@@ -118,7 +118,7 @@ public class AdminCourseController {
 		
 		//과정정보 수정
 		adminCourseService.updateCourse(courseDto);
-		return "redirect:/admin/course/update?cid="+courseDto.getCid();
+		return "redirect:/admin/course/view?cid="+courseDto.getCid();
 	}
 	
 	//과정삭제하기

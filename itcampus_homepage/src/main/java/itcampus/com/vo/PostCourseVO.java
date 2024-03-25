@@ -68,16 +68,18 @@ public class PostCourseVO {
 		
 		this.pid=postCourseDto.getPid();
 		
+		//과정명입력시 처리
 		//cid가 없는 경우(검색작성)와 있는 경우(직접작성)
-		if(postCourseDto.getCid()==0) {
+		if(postCourseDto.getCid()==0) {//직접입력
 			this.coursevo=null; //coursevo 객체가 없는경우에는 null을 저장해야 함
 		}else {
-			this.coursevo=courseVOObj;			
+			this.coursevo=courseVOObj;//검색입력			
 		}
 		this.ptitle=postCourseDto.getPtitle();
 		this.pcontent=postCourseDto.getPcontent();
 		this.pregdate=postCourseDto.getPregdate();
 		this.membervo=memberVOObj;
+		this.puse=postCourseDto.getPuse();
 	}
 }
 

@@ -43,7 +43,7 @@ public class AdminPostCourseController {
 		return "admin/postcourselist";
 	}
 	
-	//후기목록
+	//후기추가폼
 	@GetMapping("/postcourse/add")
 	public String postCourseAddForm(Model model) {
 		logger.debug("후기추가폼이동");
@@ -51,7 +51,7 @@ public class AdminPostCourseController {
 	}
 	
 	//후기등록
-	//1.후기등록시 과정목록 검색
+	//1.후기등록시 [과정목록 검색 기능]
 	@ResponseBody
 	@GetMapping("/postcourse/search")
 	public Map<String,List<CourseVO>> courseList(Model model) {
@@ -63,12 +63,12 @@ public class AdminPostCourseController {
 		System.out.println("cList size:"+cList.size());
 		return map;
 	}
-	
-	//후기등록
+
 	//2.후기등록하기
 	@PostMapping("/postcourse/add")
 	public String postCourseAdd(PostCourseDto postCourseDto, Model model) {
 		logger.debug("후기등록");
+		System.out.println(postCourseDto);
 		adminPostCourseService.insertPostCourse(postCourseDto);
 		return "redirect:/admin/postcourse";
 	}
@@ -79,8 +79,25 @@ public class AdminPostCourseController {
 		logger.debug("후기상세보기");
 		PostCourseVO pDetail = adminPostCourseService.postCourseView(pid);
 		model.addAttribute("pDetail", pDetail);
-		
+		System.out.println(pDetail);
 		return "admin/postcourseview";
+	}
+	
+	//후기수정하기
+	@PostMapping("/postcourse/update")
+	public String postCourseUpdate(PostCourseDto postCourseDto,Model model) {
+		logger.debug("후기수정하기");
+		System.out.println(postCourseDto);
+		adminPostCourseService.updatePostCourse(postCourseDto);
+		return "redirect:/admin/postcourse/view?pid="+postCourseDto.getPid();
+	}
+	
+	//후기삭제하기
+	@GetMapping("/postcourse/delete")
+	public String postCourseDelete(int pid,Model model) {
+		logger.debug("후기삭제하기");
+		adminPostCourseService.deletePostCourse(pid);
+		return "redirect:/amdin/postcourse";
 	}
 }
 

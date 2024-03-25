@@ -18,7 +18,7 @@ public class AdminPostCourseServiceImpl implements AdminPostCourseService{
 	
 	@Override
 	public List<PostCourseVO> postCourseList() {
-		return adminPostCourseServiceRepository.findAll();
+		return adminPostCourseServiceRepository.findByPuse("Y");
 	}
 
 	@Override
@@ -35,14 +35,16 @@ public class AdminPostCourseServiceImpl implements AdminPostCourseService{
 	
 	@Override
 	public void updatePostCourse(PostCourseDto postcourseDto) {
-		// TODO Auto-generated method stub
-		
+		PostCourseVO postCourseVO=new PostCourseVO();
+		postCourseVO.setCourseVO(postcourseDto);
+		adminPostCourseServiceRepository.save(postCourseVO);
 	}
 
 	@Override
 	public void deletePostCourse(int pid) {
-		// TODO Auto-generated method stub
-		
+		PostCourseVO postCourseVO = adminPostCourseServiceRepository.findByPid(pid);
+		postCourseVO.setPuse("N");
+		adminPostCourseServiceRepository.save(postCourseVO);
 	}
 
 
