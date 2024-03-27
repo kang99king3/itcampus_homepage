@@ -11,7 +11,7 @@ public interface AdminCourseService {
 
 	public void insertCourse(CourseDto courseDto);//과정정보등록
 
-	public CourseVO courseUpdateForm(int cid);//과정수정폼
+	public CourseVO courseView(int cid);//과정수정폼
 
 	public void updateCourse(CourseDto courseDto);//과정수정하기
 

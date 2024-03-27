@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
 
@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>과정목록</title>
+    <title>프로젝트목록</title>
 
     <!-- Custom fonts for this template-->
     <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,9 +19,6 @@
 
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
-    
-    <!-- Custom styles for this page -->
-    <link href="/bootstrap/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -132,44 +129,11 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">학생프로젝트목록</h1>
-					<div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Student Project List</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>과정명</th>
-                                            <th>주제</th>
-                                            <th>등록자</th>
-                                            <th>작성일</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    	<tr th:each="item, stat : ${slist}">
-	                                        <td th:text="${stat.index + 1}"></td>
-											<td>
-												<a th:href="@{/admin/project/view(sid=${item.sid})}" th:text="${item.cname}"></a>
-											</td>
-	                                        <td th:text="${item.stitle}"></td>
-	                                        <td th:text="${item.membervo.mid}"></td>
-	                                        <td th:text="${item.sregdate}"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <a href="/admin/project/add" class="btn btn-primary btn-icon-split">
-	                            <span class="text">등록</span>
-                            </a>
-                        </div>
-                    </div>
+                    <h1 class="h3 mb-4 text-gray-800">프로젝트목록</h1>
+
                 </div>
                 <!-- /.container-fluid -->
-				
+
             </div>
             <!-- End of Main Content -->
 
@@ -223,24 +187,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/bootstrap/js/sb-admin-2.min.js"></script>
-    
- 	<!-- Page level plugins -->
-    <script src="/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-<!--     <script src="/bootstrap/js/demo/datatables-demo.js"></script> -->
-	<script type="text/javascript">
-		//dataTable 설정
-		$(function(){
-			$("#dataTable").DataTable({
-				"paging":true,
-				"searching":true,
-				"ordering":true,
-				"responsive":true
-			});			
-		});
-	</script>
 
 </body>
 

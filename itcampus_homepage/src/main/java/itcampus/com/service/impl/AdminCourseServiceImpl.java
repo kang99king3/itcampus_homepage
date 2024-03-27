@@ -30,7 +30,7 @@ public class AdminCourseServiceImpl implements AdminCourseService{
 	}
 
 	@Override
-	public CourseVO courseUpdateForm(int cid) {
+	public CourseVO courseView(int cid) {
 		return adminCourseServiceRepository.findByCid(cid);
 	}
 

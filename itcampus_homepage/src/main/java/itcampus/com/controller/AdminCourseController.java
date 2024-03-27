@@ -80,7 +80,7 @@ public class AdminCourseController {
 	@GetMapping("/course/view")
 	public String courseUpdateForm(int cid, Model model) {
 		logger.debug("과정상세보기");
-		CourseVO cDetail= adminCourseService.courseUpdateForm(cid);
+		CourseVO cDetail= adminCourseService.courseView(cid);
 		
 		String cthumb=cDetail.getCthumb();
 		String cthumbPath=cthumb.substring(cthumb.indexOf("/file"));
