@@ -152,10 +152,10 @@
                                     <tbody>
                                     	<tr th:each="item, stat : ${slist}">
 	                                        <td th:text="${stat.index + 1}"></td>
+	                                        <td th:text="${item.cname}"></td>
 											<td>
-												<a th:href="@{/admin/project/view(sid=${item.sid})}" th:text="${item.cname}"></a>
+												<a th:href="@{/admin/project/view(sid=${item.sid})}" th:text="${item.stitle}"></a>
 											</td>
-	                                        <td th:text="${item.stitle}"></td>
 	                                        <td th:text="${item.membervo.mid}"></td>
 	                                        <td th:text="${item.sregdate}"></td>
                                         </tr>

@@ -13,7 +13,7 @@ public interface AdminStudentProjectService {
 
 	public void insertProject(StudentProjectDto studentProjectDto);//과정정보등록
 
-	public StudentProjectVO projectView(int sid);//과정수정폼
+	public StudentProjectVO projectView(int sid);//과정상세보기
 
 	public void updateProject(StudentProjectDto studentProjectDto);//과정수정하기
 

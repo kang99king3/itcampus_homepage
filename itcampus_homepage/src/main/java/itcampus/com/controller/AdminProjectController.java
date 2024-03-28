@@ -72,7 +72,7 @@ public class AdminProjectController {
 		
 		final Map<String, MultipartFile> files = multiRequest.getFileMap();
 		System.out.println("file:"+files.get("sthumbfile").getOriginalFilename());
-		if (files.get("cthumbfile").getOriginalFilename()!="") {
+		if (files.get("sthumbfile").getOriginalFilename()!="") {
 			result=fileUtil.parseFileInf(files, "PRJ_", 0, "", "");
 			String sthumb = result.get(0).getFileStreCours()+"/"+result.get(0).getStreFileNm();
 			StudentProjectDto.setSthumb(sthumb);

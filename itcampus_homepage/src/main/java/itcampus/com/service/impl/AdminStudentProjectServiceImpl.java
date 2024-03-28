@@ -31,23 +31,29 @@ public class AdminStudentProjectServiceImpl implements AdminStudentProjectServic
 
 	@Override
 	public StudentProjectVO projectView(int sid) {
-		
-		return null;
+		return adminStudentProjectRepository.findBySid(sid);
 	}
 
 	@Override
 	public void updateProject(StudentProjectDto studentProjectDto) {
+		StudentProjectVO studentProjectVO=new StudentProjectVO();
+		studentProjectVO.setStudentProjectVO(studentProjectDto);
 		
+		adminStudentProjectRepository.save(studentProjectVO);
 	}
 
 	@Override
 	public void deleteProject(int sid) {
-		
+		StudentProjectVO studentProjectVO=adminStudentProjectRepository.findBySid(sid);
+		studentProjectVO.setSuse("N");
+		adminStudentProjectRepository.save(studentProjectVO);
 	}
 
 	@Override
 	public void copyProject(int sid) {
-		
+		StudentProjectVO studentProjectVO=adminStudentProjectRepository.findBySid(sid);
+		studentProjectVO.setSid(0);
+		adminStudentProjectRepository.save(studentProjectVO);
 	}
 
 }
