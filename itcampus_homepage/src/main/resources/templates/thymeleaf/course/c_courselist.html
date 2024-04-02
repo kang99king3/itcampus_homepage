@@ -52,7 +52,7 @@
 						<div class="row">
 							<div class="col-sm" style="text-align: center;">
 							  	<div>
-							  		<img style="width:100%;" src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/11/07/F138_cdi4e1al_small.png" alt="과정이미지" />
+							  		<img style="width:100%;" th:src="${item.cthumb}" alt="과정이미지" />
 							  	</div>
 							  	<h3 th:text="${item.cname}"></h3>
 							  	<div th:text="${#strings.replace(item.csdate,'-','.')} + ' ~ ' + ${#strings.replace(item.cedate,'-','.')}"></div>
