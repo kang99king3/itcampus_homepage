@@ -271,7 +271,18 @@
 	<script src="/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 	<!-- Page level custom scripts -->
-	<script src="/bootstrap/js/demo/datatables-demo.js"></script>
+<!-- 	<script src="/bootstrap/js/demo/datatables-demo.js"></script> -->
+	<script type="text/javascript">
+		//dataTable 설정
+		$(function(){
+			$("#dataTable").DataTable({
+				"paging":true,
+				"searching":true,
+				"ordering":true,
+				"responsive":true
+			});			
+		});
+	</script>
 </body>
 
 </html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<style type="text/css">
+	body{
+		background-color: #646464;
+		padding:0px;
+		margin: 0px;
+	}
+	
+	#container{
+		display:flex;
+		flex-direction: row;
+		width: 1000px;
+		margin: 0 auto;
+	}
+	#pcview{
+		width:500px;
+/* 		background-color: black; */
+		color:white;
+	}
+	#main{
+		width: 500px;
+		background-color: white;
+/* 		height: 920px; */
+	}
+	header{
+		text-align: center;
+		position: fixed;
+		background-color: white;
+		width: 500px;
+	}
+	#contents{
+		margin-top: 200px;
+	}
+	#contents .mainImg{
+		border: 1px solid gray;
+		height: 200px;
+	}
+	#contents .edulist{
+		border: 1px solid gray;
+		height: 250px;
+	}
+	#contents .sub1{
+		border: 1px solid gray;
+		height: 250px;
+	}
+	#contents .sub2{
+		border: 1px solid gray;
+		height: 250px;
+	}
+	#contents .sub3{
+		border: 1px solid gray;
+		height: 250px;
+	}
+	
+	.gnb{
+		display: flex;
+		flex-direction: row;
+		height: 60px;
+		position: fixed;
+		bottom: 0px;
+		width: 500px;
+	}
+	.gnb > div{
+		width: 100px;
+		text-align: center;
+		border: 1px solid white;
+		background-color: black;
+		padding: 5px 2px;
+	}
+	
+	.gnb > div >a{
+		text-decoration: none;
+		color:white;
+	}
+	
+	#pcview > p{
+		margin: 400px 20px;
+		font-weight: bold;
+		font-size: 30px;
+		text-align: center;
+	}
+	
+	#pcview > p{
+		display: none;
+		position: fixed;
+		width: 400px;
+	}
+	
+	.mainImg > img{
+		width:500px;
+		height: 200px;
+	}
+	.edulist > img{
+		width:500px;
+		height: 250px;
+	}
+</style>
+<script type="text/javascript">
+	$(function(){
+		$("#pcview > p").first().show();
+		
+		setInterval(function(){
+			$("#pcview").append($("#pcview > p").first());
+			$("#pcview > p").hide().first().fadeIn(3000);
+		},5000);
+	});
+</script>
+</head>
+<body>
+<div id="container">
+	<div id="pcview">
+		<p>자바 웹 프로그래밍 분야에 ​취업하기 위한 ​비전공자/초보자 맞춤형 코스</p>
+		<p>파워있는마케터가 되는 데이터 분석 기반 디지털 마케팅 코스</p>
+		<p>노베이스에서 현직자로!</p>
+		<p>스스로 만드는 취업 가치! value up프로그램</p>
+		<p>데이터로 소통하는 찐 마케터 양성 코스</p>
+		<p>취업정보,이력서,면접준비 관리를 통한 한경IT교육센터만의 개인 맞춤형 취업지원​</p>
+		<p>실무 교육과 취업준비를 한번에!  </p>
+		<p>비전공자, 초보자도 실무기반 프로젝트 경험하고 개발자로 취업 ​</p>
+		<p>실무자가 참여하는 프로젝트기반 실전 교육 ​프로그램​​</p>
+	</div>
+	<div id="main">
+		<header><h1>한경닷컴IT교육센터</h1><h2>웹프로그래밍/데이터분석마케팅<br/>전문교육기관</h2></header>
+		<div id="contents">
+			<div class="mainImg"><img src="/img/main.JPG" alt="메인이미지"/></div>
+			<div class="edulist"><img src="/img/curriculum.JPG" alt="교육과정목록"/></div>
+			<div class="sub1">교육생후기</div>
+			<div class="sub2">협약기업[배너]</div>
+			<div class="sub3">
+				<h3>온라인/방문상담</h3>
+				<address>한경닷컴IT교육센터 주소. 서울시 영등포구 양산로 53 월드메르디앙 비즈센터 401호​
+						대표자. 정종태 l TEL 02-6340-2233 / 02-6340-2460​
+						itcampus@hankyung.com​
+						사업자등록번호 : 104-81-47984​
+						Copyright ⓒ 2021 한경닷컴 IT교육센터 All Rights Reserved.
+				​</address>
+			</div>		
+		</div>
+		<div class="gnb">
+			<div><a href="/curriculumList">교육과정</a></div>
+			<div><a href="#">정부지원사업안내</a></div>
+			<div><a href="#">교육센터소개</a></div>
+			<div><a href="#">훈련생프로젝트및후기</a></div>
+			<div><a href="#">상담센터</a></div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

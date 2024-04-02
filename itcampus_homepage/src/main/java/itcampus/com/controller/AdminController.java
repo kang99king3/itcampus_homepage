@@ -100,6 +100,8 @@ public class AdminController {
             out.println("</body></html>");
         }
 		
+        logger.debug("로그아웃");
+        
 		return "redirect:/admin/login";
 	}
 	

@@ -57,12 +57,12 @@ public class EgovSampleController {
 //	}
 	
 //  로그인 폼 먼저보여줄때
-	@GetMapping("/")
-	public String login(@ModelAttribute LoginVO loginVO, Model model) {
-		logger.info("로그인화면");
-		model.addAttribute("loginVO", loginVO);
-		return "index";
-	}
+//	@GetMapping("/")
+//	public String login(@ModelAttribute LoginVO loginVO, Model model) {
+//		logger.info("로그인화면");
+//		model.addAttribute("loginVO", loginVO);
+//		return "index";
+//	}
 	
 	@RequestMapping(value = "/sample/list",method = {RequestMethod.GET,RequestMethod.POST})
 	@PostMapping("/sample/list")
