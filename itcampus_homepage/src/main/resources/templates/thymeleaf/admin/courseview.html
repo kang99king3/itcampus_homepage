@@ -144,7 +144,7 @@
                             	<form id="cform"  method="post" enctype="multipart/form-data">
 	                                <input type="hidden" name="cid" th:value="${cDetail.cid}"/>
                         			<input type="hidden" name="mno" th:value="${cDetail.membervo.mno}"/>
-                        			<input type="hidden" name="cuse" th:value="${cDetail.cuse}"/>
+<!--                         			<input type="hidden" name="cuse" th:value="${cDetail.cuse}"/> -->
 	                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 	                                    <tbody>
 	                                    	<tr>
@@ -213,19 +213,19 @@
 	                                            	</div>
 	                                            </td>
 	                                        </tr>
-<!-- 	                                        <tr> -->
-<!-- 	                                            <th>사용여부</th> -->
-<!-- 	                                            <td> -->
-<!-- 	                                            	<div class="row">                   -->
-<!-- 													    <div class="col-1"> -->
-<!-- 		                                            	<select name="cuse" class="form-control" required="required"> -->
-<!-- 		                                            		<option value="Y" th:selected="${cDetail.cuse=='Y'}">Y</option> -->
-<!-- 		                                            		<option value="N" th:selected="${cDetail.cuse=='N'}">N</option> -->
-<!-- 		                                            	</select>   -->
-<!-- 													    </div> -->
-<!-- 													</div> -->
-<!-- 	                                            </td> -->
-<!-- 	                                        </tr> -->
+	                                        <tr>
+	                                            <th>사용여부</th>
+	                                            <td>
+	                                            	<div class="row">                  
+													    <div class="col-1">
+		                                            	<select name="cuse" class="form-control" required="required">
+		                                            		<option value="Y" th:selected="${cDetail.cuse=='Y'}">Y</option>
+		                                            		<option value="N" th:selected="${cDetail.cuse=='N'}">N</option>
+		                                            	</select>  
+													    </div>
+													</div>
+	                                            </td>
+	                                        </tr>
 	                                        <tr>
 	                                        	<td colspan="2">
 	                                        		<span class="float-right">

@@ -18,7 +18,8 @@ public class AdminCourseServiceImpl implements AdminCourseService{
 	
 	@Override
 	public List<CourseVO> courseList() {
-		List<CourseVO> list= adminCourseServiceRepository.findByCuse("Y");
+//		List<CourseVO> list= adminCourseServiceRepository.findByCuseOrderByCsdateDesc("Y");
+		List<CourseVO> list= adminCourseServiceRepository.findAllByOrderByCsdateDesc();
 		return list;
 	}
 

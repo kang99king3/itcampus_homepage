@@ -147,6 +147,7 @@
                                             <th>과정구분</th>
                                             <th>교육기간</th>
                                             <th>모집인원</th>
+                                            <th>사용여부</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -158,6 +159,7 @@
 	                                        <td th:text="${item.ccate}"></td>
 	                                        <td th:text="${item.csdate} + ' ~ ' + ${item.cedate}"></td>
 	                                        <td th:text="${item.cnumber}"></td>
+	                                        <td th:text="${item.cuse}"></td>
                                         </tr>
                                     </tbody>
                                 </table>
