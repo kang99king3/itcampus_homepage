@@ -1,0 +1,13 @@
+<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ico">
+<circle id="Ellipse 51" cx="30" cy="30" r="30" fill="#F2F6FF"/>
+<g id="credit_score">
+<mask id="mask0_311_71189" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="12" y="12" width="36" height="36">
+<rect id="Bounding box" x="12.8574" y="12.8574" width="34.2857" height="34.2857" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_311_71189)">
+<path id="account_balance" d="M20.8108 38.5707V28.3066H23.1679V38.5707H20.8108ZM29.3435 38.5707V28.3066H31.7005V38.5707H29.3435ZM16.2852 42.8563V40.7135H44.5703V42.8563H16.2852ZM37.6875 38.5707V28.3066H40.0446V38.5707H37.6875ZM16.2852 26.1638V24.171L30.4277 17.1426L44.5703 24.171V26.1638H16.2852Z" fill="#394FE9"/>
+</g>
+</g>
+</g>
+</svg>

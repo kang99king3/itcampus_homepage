@@ -16,7 +16,7 @@ import itcampus.com.vo.StudentProjectVO;
 @Controller
 public class CourseController {
 
-	Logger logger=LoggerFactory.getLogger(AdminCourseController.class);
+	Logger logger=LoggerFactory.getLogger(CourseController.class);
 	
 	@Autowired
 	private CourseService courseService;
@@ -36,6 +36,8 @@ public class CourseController {
 				
 		model.addAttribute("clist", clist);
 		
-		return "course/c_courselist";
+		return "course/course";
 	}
+	
+	
 }

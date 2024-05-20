@@ -15,7 +15,7 @@ import itcampus.com.vo.StudentProjectVO;
 @Controller
 public class ProjectController {
 
-	Logger logger=LoggerFactory.getLogger(AdminCourseController.class);
+	Logger logger=LoggerFactory.getLogger(ProjectController.class);
 	
 	@Autowired
 	private StudentProjectService studentProjectService;
@@ -35,6 +35,6 @@ public class ProjectController {
 		}
 		
 		System.out.println("sList size:"+sList.size());
-		return "course/c_studentprojectlist";
+		return "manage/project";
 	}
 }

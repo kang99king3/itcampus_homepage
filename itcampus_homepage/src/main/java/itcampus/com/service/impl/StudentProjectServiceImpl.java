@@ -20,7 +20,8 @@ public class StudentProjectServiceImpl implements StudentProjectService{
 	
 	@Override
 	public List<StudentProjectVO> projectList() {
-		return studentProjectRepository.findBySuse("Y");
+//		return studentProjectRepository.findBySuse("Y");
+		return studentProjectRepository.findTop10BySuseOrderBySregdateDesc("Y");
 	}
 
 //	@Override

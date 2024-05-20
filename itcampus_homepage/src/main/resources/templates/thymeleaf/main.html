@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,20 +7,20 @@
 
     <!-- og -->
     <meta name="title" content="한경IT교육센터">
-    <meta name="description" content="한경IT교육센터, 웹프로그래밍/데이터분석마케팅 전문교육기관​">
+    <meta name="description" content="한경IT교육센터, 디지털 이노베이션 교육기관 ​">
     <meta name="author" content="한국경제">
     <meta property="og:title" content="한경IT교육센터">
     <meta property="og:url" content="">
     <meta property="og:type" content="website"/>
-    <meta property="og:description" content="한경IT교육센터, 웹프로그래밍/데이터분석마케팅 전문교육기관​">
+    <meta property="og:description" content="한경IT교육센터, 디지털 이노베이션 교육기관 ​">
     <meta property="og:site_name" content="한경트래블러"/>
     <meta property="og:image" content="https://hkstatic.hankyung.com/resource/itcampus/img/og.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="한경IT교육센터">
-    <meta name="twitter:description" content="한경IT교육센터, 웹프로그래밍/데이터분석마케팅 전문교육기관​">
-    <meta name="twitter:image:src" content="">
+    <meta name="twitter:description" content="한경IT교육센터, 디지털 이노베이션 교육기관 ​">
+    <meta name="twitter:image:src" content="https://hkstatic.hankyung.com/resource/itcampus/img/og.jpg">
     <!-- favicon -->
     <link rel="shortcut icon" href="https://www.hankyung.com/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="192x192" href="https://hkstatic.hankyung.com/resource/common/img/favicon/apple-touch-icon.png">
@@ -36,42 +35,42 @@
                 <header class="header">
                     <div class="header-inner">
                         <h1 class="logo">
-                            <a href="#">
+                            <a href="/">
                                 <img src="https://static.hankyung.com/resource/itcampus/img/logo-itcampus.svg" alt="한국경제 IT교육센터">
                             </a>
                         </h1>
                         <div class="header-banner">
-                            <img src="https://static.hankyung.com/resource/itcampus/img/banner-top.jpg" alt="웹프로그래밍/데이터분석마케팅 전문교육기관​">
+                            <img src="https://static.hankyung.com/resource/itcampus/img/banner-top.jpg" alt="디지털 이노베이션 교육기관 ​">
                         </div>
                     </div>
                 </header>
                 <nav class="quick-nav">
                     <ul class="gnb">
                         <li>
-                            <a href="#">
+                            <a href="/course">
                                 <span class="txt">교육과정</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/courseinfo">
                                 <span class="txt">정부지원<br>사업안내</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/centerinfo">
                                 <span class="txt">교육센터<br>소개</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/project">
                                 <span class="txt">
                                     <span class="is-pc">훈련생</span>
-                                    프로젝트<br class="is-m"> 및 후기
+                                    프로젝트<br class="is-m">
                                 </span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/contact">
                                 <span class="txt">상담센터</span>
                             </a>
                         </li>
@@ -105,9 +104,9 @@
                         <div class="course-item">
                             <a href="#" class="link-block">
                                 <div class="thumb">
-                                    <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2024/04/16/F141_1cf61a54f73ac6c2dd5fa0688ab82aff_small.jpg" alt="엔터테인먼트 영상기획/제작 과정 1기">
+                                    <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/11/07/F138_cdi4e1al_small.png" alt="엔터테인먼트 영상기획/제작 과정 1기">
                                 </div>
-                                <div class="category">기타교육</div>
+                                <div class="category">K디지털트레이닝</div>
                                 <div class="txt-cont">
                                     <div class="course-tit">
                                         엔터테인먼트 영상기획/제작 과정 1기
@@ -118,6 +117,10 @@
                                     <div class="btns">
                                         <div class="btn-more">자세히보기</div>
                                     </div>
+                                </div>
+                                <div class="status-badge ing">
+                                    24.03.20<br>
+                                    개강
                                 </div>
                             </a>
                         </div>
@@ -138,43 +141,55 @@
                                         <div class="btn-more">자세히보기</div>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="course-item">
-                            <a href="#" class="link-block">
-                                <div class="thumb">
-                                    <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2024/04/16/F141_1cf61a54f73ac6c2dd5fa0688ab82aff_small.jpg" alt="엔터테인먼트 영상기획/제작 과정 1기">
-                                </div>
-                                <div class="category">기타교육</div>
-                                <div class="txt-cont">
-                                    <div class="course-tit">
-                                        엔터테인먼트 영상기획/제작 과정 1기
-                                    </div>
-                                    <div class="date">
-                                        2024-05-13 ~ 2024-07-26
-                                    </div>
-                                    <div class="btns">
-                                        <div class="btn-more">자세히보기</div>
-                                    </div>
+                                <div class="status-badge ing">
+                                    24.03.20<br>
+                                    개강
                                 </div>
                             </a>
                         </div>
                         <div class="course-item">
                             <a href="#" class="link-block">
                                 <div class="thumb">
-                                    <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/11/07/F138_cdi4e1al_small.png" alt="[4차/모집중] PBL기반 자바/스프링 백엔드 과정">
+                                    <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/08/24/F130_ai_rpa_small.png" alt="[모집완료] AI와 RPA기반 웹서비스 자동화 개발과정">
                                 </div>
                                 <div class="category">K디지털트레이닝</div>
                                 <div class="txt-cont">
                                     <div class="course-tit">
-                                        [4차/모집중] PBL기반 자바/스프링 백엔드 과정
+                                        [모집완료] AI와 RPA기반 웹서비스 자동화 개발과정
                                     </div>
                                     <div class="date">
-                                        2024-05-13 ~ 2024-07-26
+                                        2023-09-25 ~ 2024-03-20
                                     </div>
                                     <div class="btns">
                                         <div class="btn-more">자세히보기</div>
                                     </div>
+                                </div>
+                                <div class="status-badge end">
+                                    24.03.20<br>
+                                    개강   
+                                </div>
+                            </a>
+                        </div>
+                        <div class="course-item">
+                            <a href="#" class="link-block">
+                                <div class="thumb">
+                                    <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/08/24/F130_ai_rpa_small.png" alt="[모집완료] AI와 RPA기반 웹서비스 자동화 개발과정">
+                                </div>
+                                <div class="category">K디지털트레이닝</div>
+                                <div class="txt-cont">
+                                    <div class="course-tit">
+                                        [모집완료] AI와 RPA기반 웹서비스 자동화 개발과정
+                                    </div>
+                                    <div class="date">
+                                        2023-09-25 ~ 2024-03-20
+                                    </div>
+                                    <div class="btns">
+                                        <div class="btn-more">자세히보기</div>
+                                    </div>
+                                </div>
+                                <div class="status-badge end">
+                                    24.03.20<br>
+                                    개강   
                                 </div>
                             </a>
                         </div>
@@ -183,58 +198,84 @@
                     <div class="review-wrap">
                         <h2 class="cont-tit">교육생 수강 후기</h2>
                         <div class="review-slide">
-                            <div class="item">
-                                <div class="item-inner">
-                                    <div class="txt-cont">
-                                        <p class="txt">
-                                            막연하게 시작하였지만 훌륭하고 좋은 강사님분들을 만나 강의를 받게 되었고 강의를 받으면서 구체적인 목표를 수립할 수 있게 되었습니다. 딱히 휴일 없이 6개월 짧지 않은 시간 힘이 안 들지는 않았지만 또래 친구들과 재미있게 할 수 있었습니다. 훈련 과정은 매우 유익했고 항상 잘 챙겨주시는 강사님들이 계셨습니다. 프로젝트를 하면서 많은 걸 배웠고 끝까지 같이 수강한 친구들과는 모두 다 잘 되고 인연이 계속 이어나갔으면 좋겠습니다.
-                                        </p>
-                                    </div>
-                                    <div class="review-info">
-                                        <strong class="date">2022. 8.26 수료</strong>
-                                        <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="item-inner">
-                                    <div class="txt-cont">
-                                        <p class="txt">
-                                            지금까지 학교생활을 하면서 선생님, 교수님을 포함해서 가장 학생을 우선적으로 생각을 해주시고 적지 않은 인원이 질문을 해도 한명씩 자세히 설명을 해주셔서 감사합니다.
-                                        </p>
-                                    </div>
-                                    <div class="review-info">
-                                        <strong class="date">2022. 8.26 수료</strong>
-                                        <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="item-inner">
-                                    <div class="txt-cont">
-                                        <p class="txt">
-                                            이전 직장에서 경험했던 개발업계에서 필요한 내용과 비교적 비슷해서 초반 적응은 빨랐던 거 같습니다. 혼자서 어떻게 공부하고 준비해야 할지 몰라서 과감히 직장을 그만두고 도전했는데, 여기서 필요한 공부를 하면서 스택을 쌓다보니 학원을 다니기 전까지 공백기간동안 별도의 준비를 못한 게 매우 아쉽다고 생각될 만큼 많이 배웠다고 생각합니다. 나이도 해당과정 수강생 중에서 많은 편이었고, 수업 진도가 나갈 수록 점점 어려워지는 게 나오면서 따라가는 게 힘들었기 때문에 수료하는 지금 시점에서 남들보다 실력이 더 낫다고 할 수는 없습니다. 그렇지만 결국 로직을 완성해서 화면에 출력되는 내용이 확인될 때의 성취감 때문이라도 개발자를 시작할 이유는 충분한 거 같습니다. 현재 코딩실력이 스스로 불만족스럽다 하더라도 데이터베이스같은 다른 실력이 자신있어서 db개발자로도 진출할 수 있는 여러 방법이 많은 걸 이번 과정을 통해 알게 되었기 때문에 초반에 겁먹던 것도 많이 줄었습니다. 수강 과정에서 모르는 게 나오면 혼자서 오랫동안 씨름하는 경우가 많았는데 그때마다 선생님께서 많이 도움주신 게 오랫동안 기억이 남을 거 같습니다. 더 많이 물어보지 못한 게 아쉬울 따름입니다.
-                                        </p>
-                                    </div>
-                                    <div class="review-info">
-                                        <strong class="date">2022. 8.26 수료</strong>
-                                        <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="item-inner">
-                                    <div class="txt-cont">
-                                        <p class="txt">
-                                            강사님 덕분에 항상 잘 따라올 수 있었습니다. 너무 감사하고 잊지 못할 6개월이었습니다. 감사했습니다 강사님!
-                                        </p>
-                                    </div>
-                                    <div class="review-info">
-                                        <strong class="date">2022. 8.26 수료</strong>
-                                        <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p>
-                                    </div>
-                                </div>
-                            </div>
+                        	<th:block th:each="item:${plist}">
+	                        	<div class="item">
+	                                <div class="item-inner">
+	                                    <div class="txt-cont">
+	                                        <p class="txt" th:text="${item.pcontent}"></p>
+	                                    </div>
+	                                    <div class="review-info">
+	                                        <strong class="date">[[${item.pregdate}]] 수료</strong>
+	                                        <p class="by">‘[[${item.ptitle}]]’ 수료생</p>
+	                                    </div>
+	                                </div>
+	                            </div>
+                            </th:block>
+<!--                             <div class="item"> -->
+<!--                                 <div class="item-inner"> -->
+<!--                                     <div class="txt-cont"> -->
+<!--                                         <p class="txt"> -->
+<!--                                             막연하게 시작하였지만 훌륭하고 좋은 강사님분들을 만나 강의를 받게 되었고 강의를 받으면서 구체적인 목표를 수립할 수 있게 되었습니다. 딱히 휴일 없이 6개월 짧지 않은 시간 힘이 안 들지는 않았지만 또래 친구들과 재미있게 할 수 있었습니다. 훈련 과정은 매우 유익했고 항상 잘 챙겨주시는 강사님들이 계셨습니다. 프로젝트를 하면서 많은 걸 배웠고 끝까지 같이 수강한 친구들과는 모두 다 잘 되고 인연이 계속 이어나갔으면 좋겠습니다. -->
+<!--                                         </p> -->
+<!--                                     </div> -->
+<!--                                     <div class="review-info"> -->
+<!--                                         <strong class="date">2022. 8.26 수료</strong> -->
+<!--                                         <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                             <div class="item"> -->
+<!--                                 <div class="item-inner"> -->
+<!--                                     <div class="txt-cont"> -->
+<!--                                         <p class="txt"> -->
+<!--                                             지금까지 학교생활을 하면서 선생님, 교수님을 포함해서 가장 학생을 우선적으로 생각을 해주시고 적지 않은 인원이 질문을 해도 한명씩 자세히 설명을 해주셔서 감사합니다. -->
+<!--                                         </p> -->
+<!--                                     </div> -->
+<!--                                     <div class="review-info"> -->
+<!--                                         <strong class="date">2022. 8.26 수료</strong> -->
+<!--                                         <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                             <div class="item"> -->
+<!--                                 <div class="item-inner"> -->
+<!--                                     <div class="txt-cont"> -->
+<!--                                         <p class="txt"> -->
+<!--                                             이전 직장에서 경험했던 개발업계에서 필요한 내용과 비교적 비슷해서 초반 적응은 빨랐던 거 같습니다. 혼자서 어떻게 공부하고 준비해야 할지 몰라서 과감히 직장을 그만두고 도전했는데, 여기서 필요한 공부를 하면서 스택을 쌓다보니 학원을 다니기 전까지 공백기간동안 별도의 준비를 못한 게 매우 아쉽다고 생각될 만큼 많이 배웠다고 생각합니다. 나이도 해당과정 수강생 중에서 많은 편이었고, 수업 진도가 나갈 수록 점점 어려워지는 게 나오면서 따라가는 게 힘들었기 때문에 수료하는 지금 시점에서 남들보다 실력이 더 낫다고 할 수는 없습니다. 그렇지만 결국 로직을 완성해서 화면에 출력되는 내용이 확인될 때의 성취감 때문이라도 개발자를 시작할 이유는 충분한 거 같습니다. 현재 코딩실력이 스스로 불만족스럽다 하더라도 데이터베이스같은 다른 실력이 자신있어서 db개발자로도 진출할 수 있는 여러 방법이 많은 걸 이번 과정을 통해 알게 되었기 때문에 초반에 겁먹던 것도 많이 줄었습니다. 수강 과정에서 모르는 게 나오면 혼자서 오랫동안 씨름하는 경우가 많았는데 그때마다 선생님께서 많이 도움주신 게 오랫동안 기억이 남을 거 같습니다. 더 많이 물어보지 못한 게 아쉬울 따름입니다. -->
+<!--                                         </p> -->
+<!--                                     </div> -->
+<!--                                     <div class="review-info"> -->
+<!--                                         <strong class="date">2022. 8.26 수료</strong> -->
+<!--                                         <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                             <div class="item"> -->
+<!--                                 <div class="item-inner"> -->
+<!--                                     <div class="txt-cont"> -->
+<!--                                         <p class="txt"> -->
+<!--                                             강사님 덕분에 항상 잘 따라올 수 있었습니다. 너무 감사하고 잊지 못할 6개월이었습니다. 감사했습니다 강사님! -->
+<!--                                         </p> -->
+<!--                                     </div> -->
+<!--                                     <div class="review-info"> -->
+<!--                                         <strong class="date">2022. 8.26 수료</strong> -->
+<!--                                         <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                             <div class="item"> -->
+<!--                                 <div class="item-inner"> -->
+<!--                                     <div class="txt-cont"> -->
+<!--                                         <p class="txt"> -->
+<!--                                             정말 어디서도 경험할 수 없었던 최고의 교육이였습니다. 감사합니다. -->
+<!--                                         </p> -->
+<!--                                     </div> -->
+<!--                                     <div class="review-info"> -->
+<!--                                         <strong class="date">2022. 8.26 수료</strong> -->
+<!--                                         <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
                         </div>
                         <div class="review-slide-paging slick-paging">
                             <button class="btn-prev">
