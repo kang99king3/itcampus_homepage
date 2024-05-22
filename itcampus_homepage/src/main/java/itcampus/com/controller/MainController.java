@@ -22,9 +22,10 @@ public class MainController {
 	
 	@GetMapping("/")
 	public String main(Model model) {
-		
+		logger.info("후기목록실행:");
 		List<PostCourseVO> pList = postCourseService.findTop10ByPuseOrderByPregdateDesc();
 		
+		logger.info("후기목록:"+pList.toString());
 		model.addAttribute("plist", pList);
 		
 		return "main"; 
