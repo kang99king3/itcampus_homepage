@@ -101,98 +101,82 @@
                     </div>
                     <!-- 교육과정 목록 -->
                     <div class="course-list">
-                        <div class="course-item">
-                            <a href="#" class="link-block">
-                                <div class="thumb">
-                                    <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/11/07/F138_cdi4e1al_small.png" alt="엔터테인먼트 영상기획/제작 과정 1기">
-                                </div>
-                                <div class="category">K디지털트레이닝</div>
-                                <div class="txt-cont">
-                                    <div class="course-tit">
-                                        엔터테인먼트 영상기획/제작 과정 1기
-                                    </div>
-                                    <div class="date">
-                                        2024-05-13 ~ 2024-07-26
-                                    </div>
-                                    <div class="btns">
-                                        <div class="btn-more">자세히보기</div>
-                                    </div>
-                                </div>
-                                <div class="status-badge ing">
-                                    24.03.20<br>
-                                    개강
-                                </div>
-                            </a>
-                        </div>
-                        <div class="course-item">
-                            <a href="#" class="link-block">
-                                <div class="thumb">
-                                    <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/11/07/F138_cdi4e1al_small.png" alt="[4차/모집중] PBL기반 자바/스프링 백엔드 과정">
-                                </div>
-                                <div class="category">K디지털트레이닝</div>
-                                <div class="txt-cont">
-                                    <div class="course-tit">
-                                        [4차/모집중] PBL기반 자바/스프링 백엔드 과정
-                                    </div>
-                                    <div class="date">
-                                        2024-05-13 ~ 2024-07-26
-                                    </div>
-                                    <div class="btns">
-                                        <div class="btn-more">자세히보기</div>
-                                    </div>
-                                </div>
-                                <div class="status-badge ing">
-                                    24.03.20<br>
-                                    개강
-                                </div>
-                            </a>
-                        </div>
-                        <div class="course-item">
-                            <a href="#" class="link-block">
-                                <div class="thumb">
-                                    <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/08/24/F130_ai_rpa_small.png" alt="[모집완료] AI와 RPA기반 웹서비스 자동화 개발과정">
-                                </div>
-                                <div class="category">K디지털트레이닝</div>
-                                <div class="txt-cont">
-                                    <div class="course-tit">
-                                        [모집완료] AI와 RPA기반 웹서비스 자동화 개발과정
-                                    </div>
-                                    <div class="date">
-                                        2023-09-25 ~ 2024-03-20
-                                    </div>
-                                    <div class="btns">
-                                        <div class="btn-more">자세히보기</div>
-                                    </div>
-                                </div>
-                                <div class="status-badge end">
-                                    24.03.20<br>
-                                    개강   
-                                </div>
-                            </a>
-                        </div>
-                        <div class="course-item">
-                            <a href="#" class="link-block">
-                                <div class="thumb">
-                                    <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/08/24/F130_ai_rpa_small.png" alt="[모집완료] AI와 RPA기반 웹서비스 자동화 개발과정">
-                                </div>
-                                <div class="category">K디지털트레이닝</div>
-                                <div class="txt-cont">
-                                    <div class="course-tit">
-                                        [모집완료] AI와 RPA기반 웹서비스 자동화 개발과정
-                                    </div>
-                                    <div class="date">
-                                        2023-09-25 ~ 2024-03-20
-                                    </div>
-                                    <div class="btns">
-                                        <div class="btn-more">자세히보기</div>
-                                    </div>
-                                </div>
-                                <div class="status-badge end">
-                                    24.03.20<br>
-                                    개강   
-                                </div>
-                            </a>
-                        </div>
+                    	<th:block th:each="item:${clist}">
+	                        <div class="course-item">
+	                            <a th:href="@{/course/detail(cid=${item.cid})}" class="link-block">
+	                                <div class="thumb">
+	                                    <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/11/07/F138_cdi4e1al_small.png" alt="엔터테인먼트 영상기획/제작 과정 1기">
+	                                </div>
+	                                <th:block th:if="${#strings.indexOf(item.ccate,'KDT') != -1}">
+                                		<div class="category">K디지털트레이닝</div>                                
+                                	</th:block>
+                                	 <th:block th:unless="${#strings.indexOf(item.ccate,'KDT') != -1}">
+	                                	<div class="category">국가기간전략산업직종</div>                                
+	                                </th:block>
+	                                <div class="txt-cont">
+	                                    <div class="course-tit" th:text="${item.cname}"></div>
+	                                    <div class="date" 
+	                                    th:text="${#strings.replace(item.csdate,'-','.')} + ' ~ ' + ${#strings.replace(item.cedate,'-','.')}">
+	                                    </div>
+	                                    <div class="btns">
+	                                        <div class="btn-more">자세히보기</div>
+	                                    </div>
+	                                </div>
+<!-- 	                                <div th:class="'status-badge ' + (${#temporals.format(item.csdate,'yyyy-MM-dd' ) > #dates.format(#dates.createToday(),'yyyy-MM-dd') ? 'end' : 'ing'})"> -->
+	                                    <div class="status-badge ing" >
+	                                    [[${#strings.substring(#strings.replace(item.csdate,'-','.'),2)}]]<br>
+                                    	개강<span style="display: none;">[[${item.csdate}]]</span>
+	                                </div>
+	                            </a>
+	                        </div>
+                        </th:block>
+<!--                         <div class="course-item"> -->
+<!--                             <a href="#" class="link-block"> -->
+<!--                                 <div class="thumb"> -->
+<!--                                     <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/11/07/F138_cdi4e1al_small.png" alt="[4차/모집중] PBL기반 자바/스프링 백엔드 과정"> -->
+<!--                                 </div> -->
+<!--                                 <div class="category">K디지털트레이닝</div> -->
+<!--                                 <div class="txt-cont"> -->
+<!--                                     <div class="course-tit"> -->
+<!--                                         [4차/모집중] PBL기반 자바/스프링 백엔드 과정 -->
+<!--                                     </div> -->
+<!--                                     <div class="date"> -->
+<!--                                         2024-05-13 ~ 2024-07-26 -->
+<!--                                     </div> -->
+<!--                                     <div class="btns"> -->
+<!--                                         <div class="btn-more">자세히보기</div> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                                 <div class="status-badge ing"> -->
+<!--                                     24.03.20<br> -->
+<!--                                     개강 -->
+<!--                                 </div> -->
+<!--                             </a> -->
+<!--                         </div> -->
+<!--                         <div class="course-item"> -->
+<!--                             <a href="#" class="link-block"> -->
+<!--                                 <div class="thumb"> -->
+<!--                                     <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/08/24/F130_ai_rpa_small.png" alt="[모집완료] AI와 RPA기반 웹서비스 자동화 개발과정"> -->
+<!--                                 </div> -->
+<!--                                 <div class="category">K디지털트레이닝</div> -->
+<!--                                 <div class="txt-cont"> -->
+<!--                                     <div class="course-tit"> -->
+<!--                                         [모집완료] AI와 RPA기반 웹서비스 자동화 개발과정 -->
+<!--                                     </div> -->
+<!--                                     <div class="date"> -->
+<!--                                         2023-09-25 ~ 2024-03-20 -->
+<!--                                     </div> -->
+<!--                                     <div class="btns"> -->
+<!--                                         <div class="btn-more">자세히보기</div> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                                 <div class="status-badge end"> -->
+<!--                                     24.03.20<br> -->
+<!--                                     개강    -->
+<!--                                 </div> -->
+<!--                             </a> -->
+<!--                         </div> -->
+
                     </div>
                     <!-- 교육생 수강 후기 -->
                     <div class="review-wrap">
@@ -225,58 +209,7 @@
 <!--                                     </div> -->
 <!--                                 </div> -->
 <!--                             </div> -->
-<!--                             <div class="item"> -->
-<!--                                 <div class="item-inner"> -->
-<!--                                     <div class="txt-cont"> -->
-<!--                                         <p class="txt"> -->
-<!--                                             지금까지 학교생활을 하면서 선생님, 교수님을 포함해서 가장 학생을 우선적으로 생각을 해주시고 적지 않은 인원이 질문을 해도 한명씩 자세히 설명을 해주셔서 감사합니다. -->
-<!--                                         </p> -->
-<!--                                     </div> -->
-<!--                                     <div class="review-info"> -->
-<!--                                         <strong class="date">2022. 8.26 수료</strong> -->
-<!--                                         <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-<!--                             <div class="item"> -->
-<!--                                 <div class="item-inner"> -->
-<!--                                     <div class="txt-cont"> -->
-<!--                                         <p class="txt"> -->
-<!--                                             이전 직장에서 경험했던 개발업계에서 필요한 내용과 비교적 비슷해서 초반 적응은 빨랐던 거 같습니다. 혼자서 어떻게 공부하고 준비해야 할지 몰라서 과감히 직장을 그만두고 도전했는데, 여기서 필요한 공부를 하면서 스택을 쌓다보니 학원을 다니기 전까지 공백기간동안 별도의 준비를 못한 게 매우 아쉽다고 생각될 만큼 많이 배웠다고 생각합니다. 나이도 해당과정 수강생 중에서 많은 편이었고, 수업 진도가 나갈 수록 점점 어려워지는 게 나오면서 따라가는 게 힘들었기 때문에 수료하는 지금 시점에서 남들보다 실력이 더 낫다고 할 수는 없습니다. 그렇지만 결국 로직을 완성해서 화면에 출력되는 내용이 확인될 때의 성취감 때문이라도 개발자를 시작할 이유는 충분한 거 같습니다. 현재 코딩실력이 스스로 불만족스럽다 하더라도 데이터베이스같은 다른 실력이 자신있어서 db개발자로도 진출할 수 있는 여러 방법이 많은 걸 이번 과정을 통해 알게 되었기 때문에 초반에 겁먹던 것도 많이 줄었습니다. 수강 과정에서 모르는 게 나오면 혼자서 오랫동안 씨름하는 경우가 많았는데 그때마다 선생님께서 많이 도움주신 게 오랫동안 기억이 남을 거 같습니다. 더 많이 물어보지 못한 게 아쉬울 따름입니다. -->
-<!--                                         </p> -->
-<!--                                     </div> -->
-<!--                                     <div class="review-info"> -->
-<!--                                         <strong class="date">2022. 8.26 수료</strong> -->
-<!--                                         <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-<!--                             <div class="item"> -->
-<!--                                 <div class="item-inner"> -->
-<!--                                     <div class="txt-cont"> -->
-<!--                                         <p class="txt"> -->
-<!--                                             강사님 덕분에 항상 잘 따라올 수 있었습니다. 너무 감사하고 잊지 못할 6개월이었습니다. 감사했습니다 강사님! -->
-<!--                                         </p> -->
-<!--                                     </div> -->
-<!--                                     <div class="review-info"> -->
-<!--                                         <strong class="date">2022. 8.26 수료</strong> -->
-<!--                                         <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-<!--                             <div class="item"> -->
-<!--                                 <div class="item-inner"> -->
-<!--                                     <div class="txt-cont"> -->
-<!--                                         <p class="txt"> -->
-<!--                                             정말 어디서도 경험할 수 없었던 최고의 교육이였습니다. 감사합니다. -->
-<!--                                         </p> -->
-<!--                                     </div> -->
-<!--                                     <div class="review-info"> -->
-<!--                                         <strong class="date">2022. 8.26 수료</strong> -->
-<!--                                         <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </div> -->
+
                         </div>
                         <div class="review-slide-paging slick-paging">
                             <button class="btn-prev">
@@ -462,7 +395,33 @@
                 arrows: false,
                 dots: true
             });
+            
+            
+            //모집 중, 개강완료 구별
+            $(".status-badge").each(function(){
+            	var csdate=$(this).children("span").text();
+            	
+            	var startDate=new Date(csdate);
+            	var currentDate=new Date();
+            	
+            	var differenceInDays = getDaysDifference(startDate,currentDate);
+            	$(this).attr("class",(differenceInDays>0? "status-badge end":"status-badge ing"));
+            });
+            
         });
+        //개강 날짜 , 현재 날짜 비교
+        function getDaysDifference(startDate, endDate) {
+            // 날짜를 밀리초 단위로 변환
+            var startMillis = startDate.getTime();
+            var endMillis = endDate.getTime();
+
+            // 1일은 24시간 * 60분 * 60초 * 1000밀리초입니다.
+            var oneDayMillis = 24 * 60 * 60 * 1000;
+
+            // 두 날짜 사이의 밀리초 차이를 일 단위로 변환하여 반환
+            var differenceInDays = Math.round((endMillis - startMillis) / oneDayMillis);
+            return differenceInDays;
+        }
     </script>
 </body>
 </html>

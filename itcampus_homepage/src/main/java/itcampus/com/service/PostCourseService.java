@@ -6,5 +6,5 @@ import itcampus.com.vo.PostCourseVO;
 
 public interface PostCourseService {
 
-	List<PostCourseVO> findTop10ByPuseOrderByPregdateDesc();//후기목록조회
-}
+	List<PostCourseVO> findTop20ByPuseOrderByPregdateDesc();//후기목록조회
+} 					 

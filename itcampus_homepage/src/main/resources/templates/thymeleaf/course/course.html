@@ -80,7 +80,7 @@
                     <div class="course-list">
                        <th:block th:each="item:${clist}">
                           <div class="course-item">
-                            <a th:href="@{/course(cid=${item.cid})}" class="link-block">
+                            <a th:href="@{/course/detail(cid=${item.cid})}" class="link-block">
                                 <div class="thumb">
                                     <img th:src="${item.cthumb}" th:alt="${item.cname}">
                                 </div>
@@ -91,12 +91,9 @@
                                 	<div class="category">국가기간전략산업직종</div>                                
                                 </th:block>
                                 <div class="txt-cont">
-                                    <div class="course-tit" th:text="${item.cname}">
-                                        엔터테인먼트 영상기획/제작 과정 1기
-                                    </div>
+                                    <div class="course-tit" th:text="${item.cname}"></div>
                                     <div class="date" 
                                     th:text="${#strings.replace(item.csdate,'-','.')} + ' ~ ' + ${#strings.replace(item.cedate,'-','.')}">
-                                        2024-05-13 ~ 2024-07-26
                                     </div>
                                     <div class="btns">
                                         <div class="btn-default">자세히보기</div>
@@ -104,14 +101,14 @@
                                 </div>
                                 <div class="status-badge ing">
                                     [[${#strings.substring(#strings.replace(item.csdate,'-','.'),2)}]]<br>
-                                    개강
+                                    개강<span style="display: none;">[[${item.csdate}]]</span>
                                 </div>
                             </a>
                         </div>
                        </th:block>
                     </div>
                     <div class="list-more-wrap">
-                        <a role="button" class="btn-more">더보기</a>
+                        <a role="button" class="btn-more" id="moreList">더보기</a>
                     </div>
 
                     <!-- 하단배너 -->
@@ -213,7 +210,110 @@
                 arrows: false,
                 dots: true
             });
-        });
+            
+          //모집 중, 개강완료 구별 상태 표시
+          courseStartStatus();
+          
+          //과정 목록 더보기
+          var pageNum=2;
+          $("#moreList").click(function(){
+        	 $.ajax({
+        		 url:"/course",
+        		 method:"post",
+        		 data:{"page":pageNum},
+        		 dataType:"json",
+        		 async:false,
+        		 success:function(data){
+	        			 var clist=data["clistMore"];//과정목록: "clistMore"로 전달된 리스트 받기
+	        			 console.log("길이:"+clist.length);
+	        			 if(clist.length>0){
+		        			 var moreList="";
+		        			 for(var i in clist){
+			        			 moreList+='<div class="course-item">' +
+			                     '	 <a href="/course/detail?cid='+ clist[i]["cid"] +'" class="link-block">'+
+				                 '        <div class="thumb">'+
+				                 '            <img src="'+clist[i]["cthumb"]+'" alt="'+clist[i]["cname"]+'">'+
+				                 '        </div>'+
+				                		  (category(clist[i].ccate)) +
+				                 '        <div class="txt-cont">'+
+				                 '            <div class="course-tit">'+clist[i]["cname"]+'</div>'+
+				                 '            <div class="date">'+
+				                 					(dateFormat(clist[i]["csdate"])+" ~ "+dateFormat(clist[i]["cedate"]))+
+				                 '            </div>'+
+				                 '            <div class="btns">'+
+				                 '                <div class="btn-default">자세히보기</div>'+
+				                 '            </div>'+
+				                 '       </div>'+
+				                 '        <div class="status-badge ing">'+
+				                 			(dateFormat(clist[i]["csdate"]).substring(2))+'<br>'+
+				                 '            개강<span style="display: none;">'+clist[i]["csdate"]+'</span>'+
+				                 '        </div>'+
+				                 '    </a>'+
+				                 '</div>' ;
+		    				 }
+		        			 $(".course-list").append(moreList);
+		        			 
+		        			 courseStartStatus();//과정 개강 상태 배경색 표시하기
+		        			 
+		        			 pageNum++;//페이지번호 증가
+		        			 
+		        			 //마지막 페이지면 "더보기"버튼감추기
+		        			 if(clist.length<6){
+		        				 $("#moreList").hide();		        				 
+		        			 }
+	        			 }
+	        			 
+	        		 },
+	        		 error:function(){
+	        			 alert("통신오류");
+	        		 }
+        	 	})	
+          });//onclick
+        });//onload
+        
+        //csdate,cedate 값 '2024-05-22' --> '2024.05.22' 변환
+        function dateFormat(date){
+        	while(true){
+        		if(date.indexOf("-")!=-1){
+        			date=date.replace("-",".");
+        		}else{
+        			return date;
+        		}
+        	}
+        }
+        //카테고리값에 따라 해당 사업내용으로 값 변환
+        function category(cate){
+        	if(cate.indexOf("KDT")!=-1){
+        		return '<div class="category">K디지털트레이닝</div>';
+        	}else{
+        		return '<div class="category">국가기간전략산업직종</div>';
+        	}
+        }
+      //개강 날짜 , 현재 날짜 비교
+        function getDaysDifference(startDate, endDate) {
+            // 날짜를 밀리초 단위로 변환
+            var startMillis = startDate.getTime();
+            var endMillis = endDate.getTime();
+
+            // 1일은 24시간 * 60분 * 60초 * 1000밀리초입니다.
+            var oneDayMillis = 24 * 60 * 60 * 1000;
+
+            // 두 날짜 사이의 밀리초 차이를 일 단위로 변환하여 반환
+            var differenceInDays = Math.round((endMillis - startMillis) / oneDayMillis);
+            return differenceInDays;
+        }
+      //교육과정 개강 상태
+      function courseStartStatus(){
+    	  $(".status-badge").each(function(){
+          	var csdate=$(this).children("span").text();
+          	
+          	var startDate=new Date(csdate);
+          	var currentDate=new Date();
+          	
+          	var differenceInDays = getDaysDifference(startDate,currentDate);
+          	$(this).attr("class",(differenceInDays>0? "status-badge end":"status-badge ing"));
+          });
+      }
     </script>
 </body>
 </html>

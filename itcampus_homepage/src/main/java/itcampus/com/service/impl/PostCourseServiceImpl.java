@@ -16,8 +16,8 @@ public class PostCourseServiceImpl implements PostCourseService{
 	PostCourseRepository postCourseRepository;
 	
 	@Override
-	public List<PostCourseVO> findTop10ByPuseOrderByPregdateDesc() {
-		return postCourseRepository.findTop10ByPuseOrderByPregdateDesc("Y");
+	public List<PostCourseVO> findTop20ByPuseOrderByPregdateDesc() {
+		return postCourseRepository.findTop20ByPuseOrderByPregdateDesc("Y");
 	}
 
 	

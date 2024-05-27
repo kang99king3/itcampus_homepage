@@ -1,8 +1,13 @@
 package itcampus.com.service.impl;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import itcampus.com.dto.CourseDto;
@@ -19,11 +24,20 @@ public class CourseServiceImpl implements CourseService{
 	CourseServiceRepository courseServiceRepository;
 	
 	@Override
-	public List<CourseVO> courseList() {
-		List<CourseVO> list= courseServiceRepository.findByCuse("Y");
-		return list;
+	public List<CourseVO> courseList(int page, int size) {
+
+		 Pageable pageable = PageRequest.of(page-1, size,Sort.by("csdate").descending());
+		 Page<CourseVO> clist=courseServiceRepository.findByCuse("Y",pageable);
+
+	     return  clist.getContent();
 	}
 
+	
+	@Override
+	public List<CourseVO> findTop4ByCuseOrderByCsdateDesc() {
+		return courseServiceRepository.findTop4ByCuseOrderByCsdateDesc("Y");
+	}
+	
 	@Override
 	public CourseVO courseView(int cid) {
 		return courseServiceRepository.findByCid(cid);

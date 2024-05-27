@@ -7,7 +7,9 @@ import itcampus.com.vo.CourseVO;
 
 public interface CourseService {
 
-	public List<CourseVO> courseList();//과정목록
+	public List<CourseVO> courseList(int page, int size);//과정목록
+	
+	public List<CourseVO> findTop4ByCuseOrderByCsdateDesc();//과정목록조회(메인)
 
 	public CourseVO courseView(int cid);//과정상세보기
 

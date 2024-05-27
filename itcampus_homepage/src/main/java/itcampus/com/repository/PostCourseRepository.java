@@ -15,5 +15,5 @@ public interface PostCourseRepository extends JpaRepository<PostCourseVO,Long>{
 //			+ "WHERE p.puse = :puse ORDER BY p.pregdate DESC")
 	@Query("SELECT p  FROM PostCourseVO p LEFT JOIN p.coursevo c "
 			+ "WHERE p.puse = :puse ORDER BY p.pregdate DESC")
-	List<PostCourseVO> findTop10ByPuseOrderByPregdateDesc(@Param("puse") String puse);//후기목록조회
+	List<PostCourseVO> findTop20ByPuseOrderByPregdateDesc(@Param("puse") String puse);//후기목록조회
 }
