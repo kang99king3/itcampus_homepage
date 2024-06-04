@@ -28,11 +28,11 @@ public class ProjectController {
 		model.addAttribute("slist", sList);
 		
 		//projectvo에 sthumb값에서 "/file/filename"로 추출하여 저장 
-		for(StudentProjectVO projectVO:sList) {
-			String sthumb=projectVO.getSthumb();
-			String sthumbPath=sthumb.substring(sthumb.indexOf("/file"));
-			projectVO.setSthumb(sthumbPath);
-		}
+//		for(StudentProjectVO projectVO:sList) {
+//			String sthumb=projectVO.getSthumb();
+//			String sthumbPath=sthumb.substring(sthumb.indexOf("/file"));
+//			projectVO.setSthumb(sthumbPath);
+//		}
 		
 		System.out.println("sList size:"+sList.size());
 		return "manage/project";

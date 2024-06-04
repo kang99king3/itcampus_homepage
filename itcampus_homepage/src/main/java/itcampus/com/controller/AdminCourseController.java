@@ -95,13 +95,15 @@ public class AdminCourseController {
 	@PostMapping("/course/update")
 	public String courseUpdate(CourseDto courseDto, Model model
 			,final MultipartHttpServletRequest multiRequest) throws Exception {
-		logger.info("과정수정하기");
-		logger.info("courseDto:"+courseDto);
+		logger.debug("과정수정하기");
+		logger.debug("courseDto:"+courseDto);
 		List<FileVO> result=null;//업로드된 파일의 정보를 저장
 
 		final Map<String, MultipartFile> files = multiRequest.getFileMap();
 
-		if(files.get("cthumbfile").getOriginalFilename()!="") {
+		logger.debug("전달되는 파일내용:"+files.get("cthumbfile").getOriginalFilename());
+//		if(files.get("cthumbfile").getOriginalFilename()!="") {
+		if(!files.get("cthumbfile").isEmpty()) {
 			System.out.println("업로드된 파일이 있는경우");
 			//업로드를 실행하고 업로드 파일정보를 반환
 			result=fileUtil.parseFileInf(files, "COS_", 0, "", "");

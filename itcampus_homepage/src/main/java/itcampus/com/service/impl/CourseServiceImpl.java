@@ -35,6 +35,12 @@ public class CourseServiceImpl implements CourseService{
 	
 	@Override
 	public List<CourseVO> findTop4ByCuseOrderByCsdateDesc() {
+//		List<CourseVO> list=courseServiceRepository.findTop4ByCuseOrderByCsdateDesc("Y");
+//		for(CourseVO courseVO:list) {
+//			String cthumb=courseVO.getCthumb();
+//			String cthumbPath=cthumb.substring(cthumb.indexOf("/file"));
+//			courseVO.setCthumb(cthumbPath);
+//		}
 		return courseServiceRepository.findTop4ByCuseOrderByCsdateDesc("Y");
 	}
 	

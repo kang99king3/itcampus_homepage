@@ -35,11 +35,11 @@ public class CourseController {
 		List<CourseVO> clist = courseService.courseList(1,size);
 		
 		//projectvo에 cthumb값에서 "/file/filename"로 추출하여 저장 
-		for(CourseVO courseVO:clist) {
-			String cthumb=courseVO.getCthumb();
-			String cthumbPath=cthumb.substring(cthumb.indexOf("/file"));
-			courseVO.setCthumb(cthumbPath);
-		}
+//		for(CourseVO courseVO:clist) {
+//			String cthumb=courseVO.getCthumb();
+//			String cthumbPath=cthumb.substring(cthumb.indexOf("/file"));
+//			courseVO.setCthumb(cthumbPath);
+//		}
 				
 		model.addAttribute("clist", clist);
 	

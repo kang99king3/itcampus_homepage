@@ -15,6 +15,9 @@ public class EgovConfigProperties {
 	private String fileStorePath;
 	@Value("${Globals.fileStorePathMac}")
 	private String fileStorePathMac;
+	@Value("${Globals.fileStorePathLinux}")
+	private String fileStorePathLinux;
+	
 	
 	@Value("${Globals.addedOptions}")
 	private String addedOptions;
@@ -38,10 +41,13 @@ public class EgovConfigProperties {
 		if (osName.toLowerCase().contains("mac")) { 
 			// mac 일때 
 			properties.put("Globals.fileStorePath", fileStorePathMac);
-		} else { 
+		}else if(osName.toLowerCase().contains("linux")) {
+			// linux 일때 
+			properties.put("Globals.fileStorePath", fileStorePathLinux);
+		}else { 
 			// 윈도우 일때 
 			properties.put("Globals.fileStorePath", fileStorePath);
-		}
+		} 
 		properties.put("Globals.addedOptions", addedOptions);
 		
 		EgovPropertyServiceImpl egovPropertyServiceImpl = new EgovPropertyServiceImpl();

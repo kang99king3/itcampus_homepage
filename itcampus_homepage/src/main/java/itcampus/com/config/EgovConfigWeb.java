@@ -78,6 +78,10 @@ public class EgovConfigWeb implements WebMvcConfigurer, ApplicationContextAware 
 		registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
         registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
         registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
+        //외부에 업로드 폴더 경로 설정
+        registry.addResourceHandler("/file/**")
+        						  .addResourceLocations("file:///home/itcampus/production/file/",
+        												"file:///C://Users/user/git/itcampus_homepage/itcampus_homepage/src/main/resources/static/file/");
 	}
 
 	@Bean

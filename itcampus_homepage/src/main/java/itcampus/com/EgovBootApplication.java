@@ -7,7 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class EgovBootApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(EgovBootApplication.class, args);
+		
+		
 	}
 
 }
