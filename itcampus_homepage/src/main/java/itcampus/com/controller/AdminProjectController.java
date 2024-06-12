@@ -108,7 +108,8 @@ public class AdminProjectController {
 
 		final Map<String, MultipartFile> files = multiRequest.getFileMap();
 
-		if(files.get("sthumbfile").getOriginalFilename()!="") {
+//		if(files.get("sthumbfile").getOriginalFilename()!="") {
+		if(!files.get("sthumbfile").isEmpty()) {	
 			System.out.println("업로드된 파일이 있는경우");
 			//업로드를 실행하고 업로드 파일정보를 반환
 			result=fileUtil.parseFileInf(files, "PRJ_", 0, "", "");
