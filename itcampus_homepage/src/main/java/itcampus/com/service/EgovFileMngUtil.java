@@ -40,90 +40,93 @@ public class EgovFileMngUtil {
      */
      
     public List<FileVO> parseFileInf(Map<String, MultipartFile> files, String KeyStr, int fileKeyParam, String atchFileId, String storePath) throws Exception {
-	int fileKey = fileKeyParam;
-
-	String storePathString = "";
-	String atchFileIdString = "";
-//
-	if ("".equals(storePath) || storePath == null) {
-		System.out.println("fileStorePath:"+propertyService.getString("Globals.fileStorePath"));
-	    storePathString = propertyService.getString("Globals.fileStorePath");//path를 따로 설정하지 않으면 Globals에서 가져오기
-	} else {
-	    storePathString = propertyService.getString(storePath);
-	}
-//	
-	atchFileId = atchFileId.replaceAll("\\s", "");
-
-//	if ("".equals(atchFileId) || atchFileId == null) {
-//	    atchFileIdString = idgenService.getNextStringId();
-//	} else {
-//	    atchFileIdString = atchFileId;
-//	}
-
-	File saveFolder = new File(EgovWebUtil.filePathBlackList(storePathString));
-	System.out.println("saveFoler.exists:"+!saveFolder.exists());
-	if (!saveFolder.exists() || saveFolder.isFile()) {
-	    saveFolder.mkdirs();
-	}
-	System.out.println("saveFolder:"+saveFolder.getPath());
-
-
-	Iterator<Entry<String, MultipartFile>> itr = files.entrySet().iterator();
-	MultipartFile file;
-	String filePath = "";
-	List<FileVO> result  = new ArrayList<FileVO>();
-	FileVO fvo;
-
-	while (itr.hasNext()) {
-	    Entry<String, MultipartFile> entry = itr.next();
-
-	    file = entry.getValue();
-	    String orginFileName = file.getOriginalFilename();
-	    
-	    //--------------------------------------
-	    // 원 파일명이 null인 경우 처리
-	    //--------------------------------------
-	    if (orginFileName == null) {
-	    	orginFileName = "";
-	    }
-	    ////------------------------------------
-
-	    //--------------------------------------
-	    // 원 파일명이 없는 경우 처리
-	    // (첨부가 되지 않은 input file type)
-	    //--------------------------------------
-	    if ("".equals(orginFileName)) {
-	    	continue;
-	    }
-	    ////------------------------------------
-	    
-		int index = orginFileName.lastIndexOf(".");
-	    //String fileName = orginFileName.substring(0, index);
-	    String fileExt = orginFileName.substring(index + 1);//파일확장자 추출
-//	    String newName = KeyStr + EgovStringUtil.getTimeStamp() + fileKey+"."+fileExt;//새로운 파일명 생성
-	    String newName = KeyStr+EgovStringUtil.getTimeStamp()+"_"+orginFileName;
-	    long _size = file.getSize();
-
-	    if (!"".equals(orginFileName)) {
-	    	filePath = storePathString + File.separator + newName;//파일명 변환하여 사용할 경우
-	    	System.out.println("FullPath = " + filePath);
-	    	file.transferTo(new File(EgovWebUtil.filePathBlackList(filePath)));
-	    }
-	    fvo = new FileVO();
-	    fvo.setFileExtsn(fileExt);
-	    fvo.setFileStreCours(storePathString);//파일경로
-	    fvo.setFileMg(Long.toString(_size));
-	    fvo.setOrignlFileNm(orginFileName);//원본파일명
-	    fvo.setStreFileNm(newName);//새파일명
-	    fvo.setAtchFileId(atchFileIdString);
-	    fvo.setFileSn(String.valueOf(fileKey));
-
-	    //writeFile(file, newName, storePathString);
-	    result.add(fvo);
-
-	    fileKey++;
-	}
-
-	return result;
+		int fileKey = fileKeyParam;
+	
+		String storePathString = "";
+		String atchFileIdString = "";
+	//
+		if ("".equals(storePath) || storePath == null) {
+			System.out.println("fileStorePath:"+propertyService.getString("Globals.fileStorePath"));
+		    storePathString = propertyService.getString("Globals.fileStorePath");//path를 따로 설정하지 않으면 Globals에서 가져오기
+		} else {
+			System.out.println("fileStorePath:"+storePath);
+		    storePathString = storePath;
+		}
+	//	
+		atchFileId = atchFileId.replaceAll("\\s", "");
+	
+	//	if ("".equals(atchFileId) || atchFileId == null) {
+	//	    atchFileIdString = idgenService.getNextStringId();
+	//	} else {
+	//	    atchFileIdString = atchFileId;
+	//	}
+	
+		File saveFolder = new File(EgovWebUtil.filePathBlackList(storePathString));
+		System.out.println("saveFoler.exists:"+!saveFolder.exists());
+		if (!saveFolder.exists() || saveFolder.isFile()) {
+		    saveFolder.mkdirs();
+		}
+		System.out.println("saveFolder:"+saveFolder.getPath());
+	
+	
+		Iterator<Entry<String, MultipartFile>> itr = files.entrySet().iterator();
+		MultipartFile file;
+		String filePath = "";
+		List<FileVO> result  = new ArrayList<FileVO>();
+		FileVO fvo;
+	
+		while (itr.hasNext()) {
+		    Entry<String, MultipartFile> entry = itr.next();
+	
+		    file = entry.getValue();
+		    String orginFileName = file.getOriginalFilename();
+		    
+		    //--------------------------------------
+		    // 원 파일명이 null인 경우 처리
+		    //--------------------------------------
+		    if (orginFileName == null) {
+		    	orginFileName = "";
+		    }
+		    ////------------------------------------
+	
+		    //--------------------------------------
+		    // 원 파일명이 없는 경우 처리
+		    // (첨부가 되지 않은 input file type)
+		    //--------------------------------------
+		    if ("".equals(orginFileName)) {
+		    	continue;
+		    }
+		    ////------------------------------------
+		    
+			int index = orginFileName.lastIndexOf(".");
+		    //String fileName = orginFileName.substring(0, index);
+		    String fileExt = orginFileName.substring(index + 1);//파일확장자 추출
+	//	    String newName = KeyStr + EgovStringUtil.getTimeStamp() + fileKey+"."+fileExt;//새로운 파일명 생성
+//		    String newName = KeyStr+EgovStringUtil.getTimeStamp()+"_"+orginFileName;
+		    String sanitizedFileName = orginFileName.replaceAll("[\\\\/:*?\"<>|\\[\\]]", "_");//파일명에서 특수문자제거 [^a-zA-Z0-9\\.\\-]
+		    String newName = KeyStr+EgovStringUtil.getTimeStamp()+"_"+sanitizedFileName;
+		    long _size = file.getSize();
+	
+		    if (!"".equals(orginFileName)) {
+		    	filePath = storePathString + File.separator + newName;//파일명 변환하여 사용할 경우
+		    	System.out.println("FullPath = " + filePath);
+		    	file.transferTo(new File(EgovWebUtil.filePathBlackList(filePath)));
+		    }
+		    fvo = new FileVO();
+		    fvo.setFileExtsn(fileExt);
+		    fvo.setFileStreCours(storePathString);//파일경로
+		    fvo.setFileMg(Long.toString(_size));
+		    fvo.setOrignlFileNm(orginFileName);//원본파일명
+		    fvo.setStreFileNm(newName);//새파일명
+		    fvo.setAtchFileId(atchFileIdString);
+		    fvo.setFileSn(String.valueOf(fileKey));
+	
+		    //writeFile(file, newName, storePathString);
+		    result.add(fvo);
+	
+		    fileKey++;
+		}
+	
+		return result;
     }
 }

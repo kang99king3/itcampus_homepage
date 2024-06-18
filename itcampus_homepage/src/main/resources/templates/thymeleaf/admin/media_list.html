@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>과정등록</title>
+    <title>과정목록</title>
 
     <!-- Custom fonts for this template-->
     <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,11 +20,8 @@
     <!-- Custom styles for this template-->
     <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
     
-    <!-- CK_Editor -->
-    <script type="text/javascript" th:src="@{/html/egovframework/com/cmm/utl/ckeditor/ckeditor.js?t=B37D54V}" ></script>
- 
     <!-- Custom styles for this page -->
-<!--     <link href="/bootstrap/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"> -->
+    <link href="/bootstrap/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -81,6 +78,7 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -126,97 +124,37 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">과정등록</h1>
-					  <div class="card shadow mb-4">
+                    <h1 class="h3 mb-4 text-gray-800">미디어목록</h1>
+					<div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Course</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Media List</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            	<form action="/admin/course/add" method="post" enctype="multipart/form-data">
-	                                <input type="hidden" name="mno" th:value="${session.loginUser.mno}"/>
-	                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-	                                    <tbody>
-	                                        <tr>
-	                                            <th>과정명</th>
-	                                            <td><input type="text" class="form-control" name="cname" required="required" /></td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>카테고리</th>
-	                                            <td>
-	                                            	<div class="row">                  
-													    <div class="col-2">
-		                                            	<select name="ccate" class="form-control" required="required">
-		                                             		<option value="KDT-1">신기술</option>
-		                                            		<option value="KDT-2">선도기업</option>
-		                                            		<option value="KDT-3">KDT기타</option>
-		                                            		<option value="NTL-1">국가기간전략</option>
-		                                            	</select>  
-													    </div>
-													</div>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>교육기간</th>
-	                                            <td>
-		                                            <div class="row">
-													    <span class="input-group-text bg-transparent border-0" >시작일:</span>                                             
-													    <div class="col-2">
-													        <input type="date" class="form-control" name="csdate"required="required">
-													    </div>
-													    <span class="input-group-text bg-transparent border-0">~</span>
-													    <span class="input-group-text bg-transparent border-0" >종료일:</span>   
-													    <div class="col-2">
-													        <input type="date" class="form-control" name="cedate" required="required">
-													    </div>
-													</div>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>모집인원</th>
-	                                            <td><input type="number" class="form-control" name="cnumber" required="required"/></td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>훈련수당</th>
-	                                            <td><input type="text" class="form-control" name="cmoney" required="required"/></td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>과정상세</th>
-	                                            <td><textarea id="description" name="ccontent" required="required"></textarea></td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>대표이미지</th>
-	                                            <td>
-	                                            	<div class="row">                  
-														<div class="col-3">
-		                                            		<input type="file" accept="/file/*" class="form-control" name="cthumbfile" onchange="setThumbnail(event);"/>                                           	
-		                                            	</div>
-													</div>
-	                                            	<div id="image_container" style="width:100%;height:100%;padding:10px 5px;"></div>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>사용여부</th>
-	                                            <td>
-	                                            	<div class="row">                  
-													    <div class="col-1">
-		                                            	<select name="cuse" class="form-control" required="required">
-		                                            		<option value="Y">Y</option>
-		                                            		<option value="N">N</option>
-		                                            	</select>  
-													    </div>
-													</div>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td colspan="2">
-												    <button class="btn btn-primary float-right" type="submit" style="width:100px;">등록</button>                                        	
-												</td>
-	                                        </tr>
-	                                    </tbody>
-	                                </table>
-								</form>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>파일명</th>
+                                            <th>설명</th>
+                                            <th>경로</th>
+                                            <th>등록일</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	<tr th:each="item, stat : ${mediaList}">
+	                                        <td th:text="${stat.index + 1}"></td>
+	                                        <td th:text="${item.mdname}"></td>
+	                                        <td th:text="${item.mdcontent}"></td>
+	                                        <td th:text="${#strings.substring(item.mdthumb,#strings.indexOf(item.mdthumb,'/media'))}"></td>
+	                                        <td th:text="${#dates.format(item.mdregdate,'yyyy-MM-dd hh:mm:ss')}"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+                            <a href="/admin/media/add" class="btn btn-primary btn-icon-split">
+	                            <span class="text">등록</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -277,48 +215,23 @@
     <script src="/bootstrap/js/sb-admin-2.min.js"></script>
     
  	<!-- Page level plugins -->
-<!--     <script src="/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script> -->
-<!--     <script src="/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
+    <script src="/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
 <!--     <script src="/bootstrap/js/demo/datatables-demo.js"></script> -->
-    
-    <!-- CKEditor를 초기화하는 스크립트 -->
-    <script>
-        CKEDITOR.replace('description',{
-		        	 extraPlugins: 'sourcearea',
-		             allowedContent: true,
-		             extraAllowedContent: '*(*)',
-        			  toolbar:[
-        		      { name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },//이름과 도구모음그룹을 정의
-        		      [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],	// 이름없이 도구모음그룹을 정의
-//         		      '/',										// 줄바꿈 - 다음 그룹이 새로운 라인에 배치 됨
-        		      { name: 'basicstyles', items: [ 'Bold', 'Italic' ] },
-        		      {name: 'styles', items:['Styles','Format','Font','FontSize']}
-        	        ]
-        });
-        
-        //파일업로드 썸네일 미리보기
-		function setThumbnail(event) {
-		    var reader = new FileReader();
-		
-		    reader.onload = function(event) {
-		        var img = document.createElement("img");
-		        img.setAttribute("src", event.target.result);
-		        
-		        // 이전에 추가된 이미지가 있으면 제거
-		        var container = document.querySelector("div#image_container");
-		        while (container.firstChild) {
-		            container.removeChild(container.firstChild);
-		        }
-		
-		        // 새로운 이미지 추가
-		        container.appendChild(img);
-		    };
-		
-		    reader.readAsDataURL(event.target.files[0]);
-		}
-    </script>
+	<script type="text/javascript">
+		//dataTable 설정
+		$(function(){
+			$("#dataTable").DataTable({
+				"paging":true,
+				"searching":true,
+				"ordering":true,
+				"responsive":true
+			});			
+		});
+	</script>
+
 </body>
 
 </html>

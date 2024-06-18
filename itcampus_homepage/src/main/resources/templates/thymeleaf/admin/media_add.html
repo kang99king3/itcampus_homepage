@@ -64,7 +64,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/admin/course"> <i class="fas fa-fw fa-cog"></i> <span>과정등록</span></a>
+               	<a class="nav-link collapsed" href="/admin/course"> <i class="fas fa-fw fa-cog"></i> <span>과정등록</span></a>
 			 	<a class="nav-link collapsed" href="/admin/postcourse"> <i class="fas fa-fw fa-cog"></i> <span>후기등록</span></a>
 			 	<a class="nav-link collapsed" href="/admin/project"> <i class="fas fa-fw fa-cog"></i> <span>훈련생 프로젝트등록</span></a>
 			 	<a class="nav-link collapsed" href="/admin/media"> <i class="fas fa-fw fa-cog"></i> <span>미디어</span></a>
@@ -126,86 +126,31 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">과정등록</h1>
+                    <h1 class="h3 mb-4 text-gray-800">미디어 등록</h1>
 					  <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Course</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Media</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            	<form action="/admin/course/add" method="post" enctype="multipart/form-data">
+                            	<form action="/admin/media/add" method="post" enctype="multipart/form-data">
 	                                <input type="hidden" name="mno" th:value="${session.loginUser.mno}"/>
 	                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 	                                    <tbody>
 	                                        <tr>
-	                                            <th>과정명</th>
-	                                            <td><input type="text" class="form-control" name="cname" required="required" /></td>
+	                                            <th>설명</th>
+<!-- 	                                            <td><textarea id="description" name="mdcontent" required="required"></textarea></td> -->
+	                                            <td><textarea name="mdcontent" cols="60" rows="10" class="form-control" required="required"></textarea></td>
 	                                        </tr>
 	                                        <tr>
-	                                            <th>카테고리</th>
-	                                            <td>
-	                                            	<div class="row">                  
-													    <div class="col-2">
-		                                            	<select name="ccate" class="form-control" required="required">
-		                                             		<option value="KDT-1">신기술</option>
-		                                            		<option value="KDT-2">선도기업</option>
-		                                            		<option value="KDT-3">KDT기타</option>
-		                                            		<option value="NTL-1">국가기간전략</option>
-		                                            	</select>  
-													    </div>
-													</div>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>교육기간</th>
-	                                            <td>
-		                                            <div class="row">
-													    <span class="input-group-text bg-transparent border-0" >시작일:</span>                                             
-													    <div class="col-2">
-													        <input type="date" class="form-control" name="csdate"required="required">
-													    </div>
-													    <span class="input-group-text bg-transparent border-0">~</span>
-													    <span class="input-group-text bg-transparent border-0" >종료일:</span>   
-													    <div class="col-2">
-													        <input type="date" class="form-control" name="cedate" required="required">
-													    </div>
-													</div>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>모집인원</th>
-	                                            <td><input type="number" class="form-control" name="cnumber" required="required"/></td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>훈련수당</th>
-	                                            <td><input type="text" class="form-control" name="cmoney" required="required"/></td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>과정상세</th>
-	                                            <td><textarea id="description" name="ccontent" required="required"></textarea></td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>대표이미지</th>
+	                                            <th>이미지등록</th>
 	                                            <td>
 	                                            	<div class="row">                  
 														<div class="col-3">
-		                                            		<input type="file" accept="/file/*" class="form-control" name="cthumbfile" onchange="setThumbnail(event);"/>                                           	
+		                                            		<input required="required" multiple="multiple" type="file" accept="/media/*" class="form-control" name="mdthumbfile" onchange="setThumbnail(event);"/>                                           	
 		                                            	</div>
 													</div>
 	                                            	<div id="image_container" style="width:100%;height:100%;padding:10px 5px;"></div>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                            <th>사용여부</th>
-	                                            <td>
-	                                            	<div class="row">                  
-													    <div class="col-1">
-		                                            	<select name="cuse" class="form-control" required="required">
-		                                            		<option value="Y">Y</option>
-		                                            		<option value="N">N</option>
-		                                            	</select>  
-													    </div>
-													</div>
 	                                            </td>
 	                                        </tr>
 	                                        <tr>
@@ -299,24 +244,43 @@
         });
         
         //파일업로드 썸네일 미리보기
-		function setThumbnail(event) {
-		    var reader = new FileReader();
-		
-		    reader.onload = function(event) {
-		        var img = document.createElement("img");
-		        img.setAttribute("src", event.target.result);
+// 		function setThumbnail(event) {
+// 		    var reader = new FileReader();
+// 		    reader.onload = function(event) {
+// 		        var img = document.createElement("img");
+// 		        img.setAttribute("src", event.target.result);
 		        
-		        // 이전에 추가된 이미지가 있으면 제거
-		        var container = document.querySelector("div#image_container");
-		        while (container.firstChild) {
-		            container.removeChild(container.firstChild);
-		        }
+// 		        // 이전에 추가된 이미지가 있으면 제거
+// 		        var container = document.querySelector("div#image_container");
+// 		        while (container.firstChild) {
+// 		            container.removeChild(container.firstChild);
+// 		        }
 		
-		        // 새로운 이미지 추가
-		        container.appendChild(img);
-		    };
+// 		        // 새로운 이미지 추가
+// 		        container.appendChild(img);
+// 		    };
 		
-		    reader.readAsDataURL(event.target.files[0]);
+// 		    reader.readAsDataURL(event.target.files[0]);
+// 		}
+        function setThumbnail(event) {
+		    var reader, img;
+		    var container = document.querySelector("div#image_container");
+		
+		    // 이전에 추가된 이미지가 있으면 제거
+		    while (container.firstChild) {
+		        container.removeChild(container.firstChild);
+		    }
+		
+		    // 선택된 파일들을 순회하며 처리
+		    Array.from(event.target.files).forEach(function(file) {
+		        reader = new FileReader();
+		        reader.onload = function(event) {
+		            img = document.createElement("img");
+		            img.setAttribute("src", event.target.result);
+		            container.appendChild(img);
+		        };
+		        reader.readAsDataURL(file);
+		    });
 		}
     </script>
 </body>

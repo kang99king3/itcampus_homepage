@@ -11,6 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import itcampus.com.controller.AdminController;
+import itcampus.com.vo.MemberVO;
 
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
@@ -37,7 +38,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false; // 컨트롤러 메소드 실행을 중단
         }
         
-        logger.info("-- 이미 로그인 되어 있음 : " + loginUser);
+        logger.info("-- 이미 로그인 되어 있음 : " + ((MemberVO)loginUser).getMid());
         return true; // 로그인한 경우, 컨트롤러 메소드 실행
     }
 
