@@ -1,81 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>교육과정 | 한경IT교육센터</title>
-
-    <!-- og -->
-    <meta name="title" content="교육과정 | 한경IT교육센터">
-    <meta name="description" content="한경IT교육센터, 디지털 이노베이션 교육기관 ​">
-    <meta name="author" content="한국경제">
-    <meta property="og:title" content="교육과정 | 한경IT교육센터">
-    <meta property="og:url" content="">
-    <meta property="og:type" content="website"/>
-    <meta property="og:description" content="한경IT교육센터, 디지털 이노베이션 교육기관 ​">
-    <meta property="og:site_name" content="한경트래블러"/>
-    <meta property="og:image" content="https://hkstatic.hankyung.com/resource/itcampus/img/og.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="교육과정 | 한경IT교육센터">
-    <meta name="twitter:description" content="한경IT교육센터, 디지털 이노베이션 교육기관 ​">
-    <meta name="twitter:image:src" content="https://hkstatic.hankyung.com/resource/itcampus/img/og.jpg">
-    <!-- favicon -->
-    <link rel="shortcut icon" href="https://www.hankyung.com/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="192x192" href="https://hkstatic.hankyung.com/resource/common/img/favicon/apple-touch-icon.png">
-    <!-- css -->
-    <link rel="stylesheet" href="https://hkstatic.hankyung.com/resource/common/library/slick/v1.6.0/slick.css">
-    <link rel="stylesheet" href="https://static.hankyung.com/resource/itcampus/css/common.css">
-</head>
+<head th:replace="fragments/homepage_header :: homepage_header"></head>
 <body>
     <div class="wrap">
         <div class="layout-wrap">
             <div class="container">
-                <header class="header">
-                    <div class="header-inner">
-                        <h1 class="logo">
-                            <a href="/">
-                                <img src="https://static.hankyung.com/resource/itcampus/img/logo-itcampus.svg" alt="한국경제 IT교육센터">
-                            </a>
-                        </h1>
-                        <div class="header-banner">
-                            <img src="https://static.hankyung.com/resource/itcampus/img/banner-top.jpg" alt="디지털 이노베이션 교육기관 ​">
-                        </div>
-                    </div>
-                </header>
-                <nav class="quick-nav">
-                    <ul class="gnb">
-                        <li>
-                            <a href="/course">
-                                <span class="txt">교육과정</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/courseinfo">
-                                <span class="txt">정부지원<br>사업안내</span>
-                            </a>
-                        </li>
-                        <li class="on">
-                            <a href="/centerinfo">
-                                <span class="txt">교육센터<br>소개</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/project">
-                                <span class="txt">
-                                    <span class="is-pc">훈련생</span>
-                                    프로젝트<br class="is-m">
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="contact">
-                                <span class="txt">상담센터</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                <div th:replace="fragments/homepage_gnb :: homepage_gnb"></div>
                 <main class="contents centerinfo">
                     <!-- 교육센터소개 -->
                     <div class="centerinfo-list">
@@ -120,35 +50,9 @@
                             </a>
                         </div>
                     </div>
-                    <!-- 상담예약 -->
-                    <div class="contact-btns">
-<!--                         <button type="button" class="btn-contact">온라인 / 방문상담예약</button> -->
-                        <!-- <a href="#" class="btn-contact">온라인 / 방문상담예약</a> [D] 링크 연결이 필요할 경우, a태그로 제작해주세요. -->
-                        <a target="_blank" href="https://docs.google.com/forms/d/1LgS6EtoBJkjCAO0XA6txPC1_Ps0NC5w0HPADyZVwKlg/edit?pli=1" class="btn-contact">온라인 / 방문상담예약</a>
-                    </div>
+                    <div th:replace="fragments/homepage_contact :: homepage_contact"></div>
                 </main>
-                <footer class="footer">
-                    <div class="footer-inner">
-                        <strong class="foot-logo">한경닷컴 IT교육센터</strong>
-                        <div class="foot-info">
-                            <div class="info-item">주소 : 서울시 영등포구 양산로 53 월드메르디앙 비즈센터 401호</div>
-                            <div class="info-item">대표자 : 정종태 l TEL 02-6340-2233 / 02-6340-2460</div>
-                            <div class="info-item">
-                                <a href="mailto:itcampus@hankyung.com">itcampus@hankyung.com</a>
-                            </div>
-                            <div class="info-item">사업자등록번호 : 104-81-47984</div>
-                        </div>
-                        <p class="copyright">Copyright ⓒ 2021 한경닷컴 IT교육센터 All Rights Reserved.</p>
-                        <div class="foot-links">
-                            <div class="item">
-                                <a href="https://itcampus.hankyung.com/terms_service/">이용약관</a>
-                            </div>
-                            <div class="item">
-                                <a href="https://itcampus.hankyung.com/%ea%b0%9c%ec%9d%b8%ec%a0%95%eb%b3%b4%ec%b7%a8%ea%b8%89%eb%b0%a9%ec%b9%a8/"><strong>개인정보취급방침</strong></a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
+                <div th:replace="fragments/homepage_footer :: homepage_footer"></div>
             </div>
            <div th:replace="fragments/aside.html :: course-banner"></div>
         </div>
