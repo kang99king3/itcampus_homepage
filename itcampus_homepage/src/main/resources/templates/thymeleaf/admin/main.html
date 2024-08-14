@@ -98,7 +98,7 @@
                                             <div class="text-2xl font-weight-bold text-primary text-uppercase mb-1">
                                                 등록된 과정 수</div>
                                             <div class="h3 mb-0 font-weight-bold text-gray-800">
-                                            <p th:text="${countTotalCourses}">과정수</p>
+                                            <a href="/admin/course"><p th:text="${countTotalCourses}">과정수</p></a>
 											</div>
                                         </div>
                                         <div class="col-auto">
@@ -118,7 +118,7 @@
                                             <div class="text-2xl font-weight-bold text-success text-uppercase mb-1">
                                                 등록된 후기 수</div>
                                             <div class="h3 mb-0 font-weight-bold text-gray-800">
-                                            <p th:text="${countTotalPostCourses}">후기수</p>
+                                            <a href="/admin/postcourse"><p th:text="${countTotalPostCourses}">후기수</p></a>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -141,7 +141,7 @@
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
                                                     <div class="h3 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                    <p th:text="${countTotalProject}">프로젝트 수/p>
+                                                    <a href="/admin/project"><p th:text="${countTotalProject}">프로젝트 수</p></a>
                                                     </div>
                                                 </div>
                                              </div>
@@ -163,7 +163,7 @@
                                             <div class="text-2xl font-weight-bold text-warning text-uppercase mb-1">
                                                 등록된 미디어 수</div>
                                             <div class="h3 mb-0 font-weight-bold text-gray-800">
-                                            <p th:text="${countTotalMedia}">미디어 수</p>
+                                            <a href="/admin/media"><p th:text="${countTotalMedia}">미디어 수</p></a>
                                             </div>
                                         </div>
                                         <div class="col-auto">
