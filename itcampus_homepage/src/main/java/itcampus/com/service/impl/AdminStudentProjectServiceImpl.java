@@ -56,4 +56,10 @@ public class AdminStudentProjectServiceImpl implements AdminStudentProjectServic
 		adminStudentProjectRepository.save(studentProjectVO);
 	}
 
+	@Override
+	public long countTotalProject() {
+		// TODO Auto-generated method stub
+		return adminStudentProjectRepository.count();
+	}
+
 }

@@ -20,4 +20,7 @@ public interface AdminStudentProjectService {
 	public void deleteProject(int sid);//과정삭제하기
 
 	public void copyProject(int sid);//과정복사하기
+	
+	long countTotalProject(); //전체 개수 보기
+
 }

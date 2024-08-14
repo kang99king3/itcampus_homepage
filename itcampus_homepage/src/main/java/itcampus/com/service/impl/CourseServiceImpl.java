@@ -49,4 +49,11 @@ public class CourseServiceImpl implements CourseService{
 		return courseServiceRepository.findByCid(cid);
 	}
 
+
+	@Override
+	public long countTotalCourses() {
+		// TODO Auto-generated method stub
+		return courseServiceRepository.count();
+	}
+
 }

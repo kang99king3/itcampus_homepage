@@ -19,4 +19,6 @@ public interface AdminCourseService {
 
 	public void copyCourse(int cid);//과정복사하기
 
+	long countTotalCourses(); //과정전체 개수 보기
+
 }

@@ -51,7 +51,7 @@ public class EgovConfigWeb implements WebMvcConfigurer, ApplicationContextAware 
 		templateResolver.setPrefix("classpath:/templates/thymeleaf/");
 		templateResolver.setSuffix(".html");
 		templateResolver.setTemplateMode(TemplateMode.HTML);
-		templateResolver.setCacheable(true);
+		templateResolver.setCacheable(false);
 		return templateResolver;
 	}
 

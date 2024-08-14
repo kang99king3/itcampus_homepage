@@ -16,6 +16,7 @@ public interface AdminMediaService {
 //	public void deleteMedia(int mdid);//미디어 삭제
 //	public void updateMedia(MediaVO mediaVO);//미디어수정하기
 
+	long countTotalMedia(); //전체 개수 보기
 
 
 }

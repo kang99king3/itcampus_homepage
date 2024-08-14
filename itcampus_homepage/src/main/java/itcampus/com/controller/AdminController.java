@@ -2,7 +2,6 @@ package itcampus.com.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,9 +17,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import itcampus.com.service.AdminCourseService;
+import itcampus.com.service.AdminMediaService;
+import itcampus.com.service.AdminPostCourseService;
 import itcampus.com.service.AdminService;
+import itcampus.com.service.AdminStudentProjectService;
 import itcampus.com.vo.MemberVO;
-import itcampus.com.vo.QnaVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,6 +32,19 @@ public class AdminController {
 
 	@Autowired
 	AdminService adminService;
+	
+	@Autowired
+	AdminCourseService adminCourseService;
+	
+	@Autowired
+	AdminPostCourseService adminPostCourseService;
+	
+	@Autowired
+	AdminStudentProjectService adminStudentProjectService;
+	
+	@Autowired
+	AdminMediaService adminMediaService;
+	
 	
 	@GetMapping("/login")
 	public String login(@ModelAttribute MemberVO memberVO, Model model) { 
@@ -111,9 +126,25 @@ public class AdminController {
 		
 		//상담신청현황 불러와야함.
 		
-		List<QnaVO> list =  adminService.list();
+		//List<QnaVO> list =  adminService.list();
 		//System.out.println(list.toString());
-		model.addAttribute("list", list);
+		//model.addAttribute("list", list);
+		
+		long countTotalCourses = adminCourseService.countTotalCourses();
+		long countTotalPostCourses = adminPostCourseService.countTotalPostCourses();
+		long countTotalProject = adminStudentProjectService.countTotalProject();
+		long countTotalMedia = adminMediaService.countTotalMedia();
+		
+		System.out.println("countTotalCourses = " + countTotalCourses);
+		System.out.println("countTotalPostCourses = " + countTotalPostCourses);
+		System.out.println("countTotalProject = " + countTotalProject);
+		System.out.println("countTotalMedia = " + countTotalMedia);
+
+		model.addAttribute("countTotalCourses", countTotalCourses);
+		model.addAttribute("countTotalPostCourses", countTotalPostCourses);
+		model.addAttribute("countTotalProject", countTotalProject);
+		model.addAttribute("countTotalMedia", countTotalMedia);
+		
 		return "admin/main";
 	}
 }

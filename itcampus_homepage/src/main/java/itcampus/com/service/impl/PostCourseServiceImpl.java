@@ -20,5 +20,11 @@ public class PostCourseServiceImpl implements PostCourseService{
 		return postCourseRepository.findTop20ByPuseOrderByPregdateDesc("Y");
 	}
 
+	@Override
+	public long countTotalPostCourses() {
+		// TODO Auto-generated method stub
+		return postCourseRepository.count();
+	}
+
 	
 }

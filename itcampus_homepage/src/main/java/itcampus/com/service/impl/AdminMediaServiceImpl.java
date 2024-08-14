@@ -32,5 +32,11 @@ public class AdminMediaServiceImpl implements AdminMediaService{
 		mediaVo.setMediaVO(mediaDto);
 		adminMediaServiceRepository.save(mediaVo);
 	}
+
+	@Override
+	public long countTotalMedia() {
+		// TODO Auto-generated method stub
+		return adminMediaServiceRepository.count();
+	}
 	
 }

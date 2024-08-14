@@ -47,5 +47,11 @@ public class AdminPostCourseServiceImpl implements AdminPostCourseService{
 		adminPostCourseServiceRepository.save(postCourseVO);
 	}
 
+	@Override
+	public long countTotalPostCourses() {
+		// TODO Auto-generated method stub
+		return adminPostCourseServiceRepository.count();
+	}
+
 
 }

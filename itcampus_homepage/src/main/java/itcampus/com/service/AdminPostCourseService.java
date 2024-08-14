@@ -16,6 +16,6 @@ public interface AdminPostCourseService {
 
 	public void deletePostCourse(int pid);//후기삭제하기
 
-
+	long countTotalPostCourses(); //과정전체 개수 보기
 
 }
