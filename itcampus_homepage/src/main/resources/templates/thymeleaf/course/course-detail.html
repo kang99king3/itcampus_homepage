@@ -3,54 +3,117 @@
 <head th:replace="fragments/homepage_header :: homepage_header"></head>
 
 <body>
-    <div class="wrap">
-        <div class="layout-wrap">
-            <div class="container">
-                <div th:replace="fragments/homepage_gnb :: homepage_gnb"></div>
+	<div class="wrap">
+		<div class="layout-wrap">
+			<div class="container">
+				<div th:replace="fragments/homepage_gnb :: homepage_gnb"></div>
 
-                <main class="contents course">
-                    <!-- 교육과정 상세 -->
-                    <div class="page-tit-wrap">
-                        <h2 class="page-tit">[[${cdetail.cname}]]</h2>
-                    </div>
-                    <div class="course-detail" th:utext="${cdetail.ccontent}">
-                        <!-- 백엔드과정 -->
-                      
-                        <!-- // 백엔드과정 -->
-                    </div>
+				<main class="contents course">
+					<!-- 교육과정 상세 -->
+					<div class="page-tit-wrap">
+						<h2 class="page-tit">[[${cdetail.cname}]]</h2>
+					</div>
+					<div class="course--intro">
+						<table class="data-table">
+							<caption>교육과정 개요</caption>
+							<tbody>
+								<tr>
+									<th scope="row">과정명</th>
+									<td>
+										<p th:text="${cdetail.cname}"></p>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">카테고리</th>
+									<td>
+ 										<p th:text="${cdetail.ccate}"></p>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">교육기간</th>
+									<td>
+										<p th:text="${cdetail.csdate} + ' ~ ' + ${cdetail.cedate}"></p>
+									</td>
+								</tr>
+								<!--                                     <tr>
+                                        <th scope="row">교육시간</th>
+                                        <td>
+                                            직무교육 80시간, 실무 팀프로젝트 8주
+                                        </td>
+                                    </tr> -->
+								<tr>
+									<th scope="row">모집인원</th>
+									<td>
+										<p th:text="${cdetail.cnumber} + ' 명'"></p>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">훈련수당</th>
+									<td>
+										<p th:text="${cdetail.cmoney}"></p>
+									</td>
+								</tr>
+ 								<tr><td><br></td></tr>
+							</tbody>
+						</table>
+						<!-- [타이틀이 세로로 적용되는 유형이 필요하다면]
+                            <table class="data-table">
+                                <caption>교육과정 개요</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">과정명</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            엔터테인먼트 영상 기획 및 제작 과정 3기
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table> -->
+					</div>
+					<div class="course-detail" th:utext="${cdetail.ccontent}">
+						<!-- 백엔드과정 -->
 
-                    <!-- 하단배너 -->
-                    <div class="bottom-banner">
-                        <a href="/diff">
-                            <img src="https://static.hankyung.com/resource/itcampus/img/banner-diff.jpg" alt="과정차별성 확인하기">
-                        </a>
-                    </div>
-                    <div th:replace="fragments/homepage_contact :: homepage_contact"></div>
-                </main>
-                <div th:replace="fragments/homepage_footer :: homepage_footer"></div>
+						<!-- // 백엔드과정 -->
+					</div>
 
-            </div>
-         <div th:replace="fragments/aside.html :: course-banner"></div>
-        </div>
-    </div>
+					<!-- 하단배너 -->
+					<div class="bottom-banner">
+						<a href="/diff"> <img
+							src="https://static.hankyung.com/resource/itcampus/img/banner-diff.jpg"
+							alt="과정차별성 확인하기">
+						</a>
+					</div>
+					<div th:replace="fragments/homepage_contact :: homepage_contact"></div>
+				</main>
+				<div th:replace="fragments/homepage_footer :: homepage_footer"></div>
 
-    <!-- js: plugins -->
-    <script src="https://hkstatic.hankyung.com/resource/common/library/jquery/v3.7.1/jquery-3.7.1.min.js"></script>
-    <script src="https://hkstatic.hankyung.com/resource/common/library/slick/v1.6.0/slick.min.js"></script>
+			</div>
+			<div th:replace="fragments/aside.html :: course-banner"></div>
+		</div>
+	</div>
 
-    <!-- js: UI -->
-    <script>
-        $(function () {
-            // PC 사이드 교육과정 배너
-            $('.course-banner-slide').slick({
-                fade: true,
-                infinite: true,
-                autoplay: true,
-                autoplaySpeed: 4000,
-                arrows: false,
-                dots: true
-            });
-        });
-    </script>
+	<!-- js: plugins -->
+	<script
+		src="https://hkstatic.hankyung.com/resource/common/library/jquery/v3.7.1/jquery-3.7.1.min.js"></script>
+	<script
+		src="https://hkstatic.hankyung.com/resource/common/library/slick/v1.6.0/slick.min.js"></script>
+
+	<!-- js: UI -->
+	<script>
+		$(function() {
+			// PC 사이드 교육과정 배너
+			$('.course-banner-slide').slick({
+				fade : true,
+				infinite : true,
+				autoplay : true,
+				autoplaySpeed : 4000,
+				arrows : false,
+				dots : true
+			});
+		});
+	</script>
 </body>
 </html>
