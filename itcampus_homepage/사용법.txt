@@ -1,0 +1,15 @@
+1. Maven 으로 install 
+2. 211.115.69.55 서버에 접속해서 
+   소스 :  C:\Users\user\.m2\repository\com\hk\itcampus_homepage\4.2.0\itcampus_homepage-4.2.0.jar 
+   타겟 :  /home/itcampus/production/itcampus_homepage-4.2.0.jar 
+   복사한다 
+3. root로 로그인 한다 (E?W5tG@hK#iG5>L)
+4. systemctl restart homepage를 실행한다.
+
+
+
+서버 IP : 211.115.69.55
+
+[OS] root / E?W5tG@hK#iG5>L , itcampus / 3<y1bHino)a(aNZ
+
+[MariaDB] itcampus / K$64ZGgzG#hOLkd^  

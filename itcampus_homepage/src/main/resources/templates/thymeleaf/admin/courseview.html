@@ -303,7 +303,7 @@
     CKEDITOR.replace('description',{
    	      extraPlugins: 'sourcearea',
           allowedContent: true,
-          extraAllowedContent: '*(*)',
+          extraAllowedContent: '*(*){*};a[*]{*}', // 모든 요소, 속성 및 스타일 허용, <a> 태그를 포함
 		  toolbar:[
 	      { name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ] },//이름과 도구모음그룹을 정의
 	      [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],	// 이름없이 도구모음그룹을 정의
