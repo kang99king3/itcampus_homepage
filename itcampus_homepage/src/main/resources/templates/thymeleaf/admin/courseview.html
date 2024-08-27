@@ -188,7 +188,7 @@
 	                                        </tr>
 	                                        <tr>
 	                                            <th>과정상세</th>
-	                                            <td><textarea id="description" th:text="${cDetail.ccontent}" name="ccontent" required="required" rows="30"></textarea></td>
+	                                            <td><textarea id="description" th:text="${cDetail.ccontent}" name="ccontent" required="required"></textarea></td>
 	                                        </tr>
 	                                        <tr>
 	                                            <th>대표이미지</th>
@@ -310,7 +310,8 @@
 //	      '/',										// 줄바꿈 - 다음 그룹이 새로운 라인에 배치 됨
 	      { name: 'basicstyles', items: [ 'Bold', 'Italic' ] },
 	      {name: 'styles', items:['Styles','Format','Font','FontSize']}
-       ]
+       ] ,
+       height: 900 // 텍스트 영역의 높이를 200px로 설정 (약 10행)
 });
         
         //파일업로드 썸네일 미리보기
