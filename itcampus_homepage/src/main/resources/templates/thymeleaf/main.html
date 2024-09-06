@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="fragments/homepage_header :: homepage_header"></head>
 
 <body>
@@ -14,15 +15,27 @@
                     <!-- 메인 교육과정 슬라이드 -->
                     <div class="main-slide-wrap">
                         <div class="main-slide">
-                            <div class="item">
-                                <a href="https://enterjobedu.co.kr/lecture/485" target="_blank">
-                                    <img src="https://itcampus.hankyung.com/media/MD_20240905013643388_메인이미지01.jpg" alt="KPOP 데이터 드리븐 마케팅">
+                            <!-- 필터링된 배너가 있을 때 -->
+                           <div th:each="banner : ${filteredBanners}" class="item" style="width: 480px;" th:if="${#lists.size(filteredBanners) > 0}">
+                                <a th:href="${banner.btargeturl}" th:attr="target=${banner.btargetmethod}">
+                                    <img th:src="${banner.burl}" th:alt="${banner.balt}">
                                 </a>
                             </div>
-                            <div class="item">
-                                <a href="https://blog.naver.com/mobilehk" target="_blank">
-                                    <img src="https://itcampus.hankyung.com/media/MD_20240905013710653_메인이미지02.jpg" alt="디지털이노베이션 교육기관">
-                                </a>
+
+                            <!-- 필터링된 배너가 없을 때 기본 배너 -->
+                            <div th:unless="${!filteredBanners.empty}">
+                                <div class="item">
+                                    <a href="https://enterjobedu.co.kr/lecture/485" target="_blank">
+                                        <img src="https://itcampus.hankyung.com/media/MD_20240905022456871_001.jpg"
+                                            alt="KPOP 데이터 드리븐 마케팅">
+                                    </a>
+                                </div>
+                                <div class="item">
+                                    <a href="https://blog.naver.com/mobilehk" target="_blank">
+                                        <img src="https://itcampus.hankyung.com/media/MD_20240905022514345_002.jpg"
+                                            alt="디지털이노베이션 교육기관">
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="main-slide-paging">
@@ -34,116 +47,118 @@
                         </div>
                     </div>
                     <!-- 교육과정 목록 -->
-                     <div class="course-list">
-                    	<th:block th:each="item:${clist}">
-	                        <div class="course-item">
-	                            <a th:href="@{/course/detail(cid=${item.cid})}" class="link-block">
-	                                <div class="thumb">
-<!-- 	                                    <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/11/07/F138_cdi4e1al_small.png" alt="엔터테인먼트 영상기획/제작 과정 1기"> --> 	                                
-	                                	<img th:src="${#strings.substring(item.cthumb,#strings.indexOf(item.cthumb,'/file'))}" th:alt="${item.cname}">
-	                                </div>
-	                                <th:block th:if="${#strings.indexOf(item.ccate,'KDT') != -1}">
-                                		<div class="category">K디지털트레이닝</div>                                
-                                	</th:block>
-                                	 <th:block th:unless="${#strings.indexOf(item.ccate,'KDT') != -1}">
-	                                	<div class="category">국가기간전략산업직종</div>                                
-	                                </th:block>
-	                                <div class="txt-cont">
-	                                    <div class="course-tit" th:text="${item.cname}"></div>
-	                                    <div class="date" 
-	                                    th:text="${#strings.replace(item.csdate,'-','.')} + ' ~ ' + ${#strings.replace(item.cedate,'-','.')}">
-	                                    </div>
-	                                    <div class="btns">
-	                                        <div class="btn-more">자세히보기</div>
-	                                    </div>
-	                                </div>
-<!-- 	                                <div th:class="'status-badge ' + (${#temporals.format(item.csdate,'yyyy-MM-dd' ) > #dates.format(#dates.createToday(),'yyyy-MM-dd') ? 'end' : 'ing'})"> -->
-	                                    <div class="status-badge ing" >
-	                                    [[${#strings.substring(#strings.replace(item.csdate,'-','.'),2)}]]<br>
-                                    	개강<span style="display: none;">[[${item.csdate}]]</span>
-	                                </div>
-	                            </a>
-	                        </div>
+                    <div class="course-list">
+                        <th:block th:each="item:${clist}">
+                            <div class="course-item">
+                                <a th:href="@{/course/detail(cid=${item.cid})}" class="link-block">
+                                    <div class="thumb">
+                                        <!-- 	                                    <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/11/07/F138_cdi4e1al_small.png" alt="엔터테인먼트 영상기획/제작 과정 1기"> -->
+                                        <img th:src="${#strings.substring(item.cthumb,#strings.indexOf(item.cthumb,'/file'))}"
+                                            th:alt="${item.cname}">
+                                    </div>
+                                    <th:block th:if="${#strings.indexOf(item.ccate,'KDT') != -1}">
+                                        <div class="category">K디지털트레이닝</div>
+                                    </th:block>
+                                    <th:block th:unless="${#strings.indexOf(item.ccate,'KDT') != -1}">
+                                        <div class="category">국가기간전략산업직종</div>
+                                    </th:block>
+                                    <div class="txt-cont">
+                                        <div class="course-tit" th:text="${item.cname}"></div>
+                                        <div class="date"
+                                            th:text="${#strings.replace(item.csdate,'-','.')} + ' ~ ' + ${#strings.replace(item.cedate,'-','.')}">
+                                        </div>
+                                        <div class="btns">
+                                            <div class="btn-more">자세히보기</div>
+                                        </div>
+                                    </div>
+                                    <!-- 	                                <div th:class="'status-badge ' + (${#temporals.format(item.csdate,'yyyy-MM-dd' ) > #dates.format(#dates.createToday(),'yyyy-MM-dd') ? 'end' : 'ing'})"> -->
+                                    <div class="status-badge ing">
+                                        [[${#strings.substring(#strings.replace(item.csdate,'-','.'),2)}]]<br>
+                                        개강<span style="display: none;">[[${item.csdate}]]</span>
+                                    </div>
+                                </a>
+                            </div>
                         </th:block>
-<!--                         <div class="course-item"> -->
-<!--                             <a href="#" class="link-block"> -->
-<!--                                 <div class="thumb"> -->
-<!--                                     <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/11/07/F138_cdi4e1al_small.png" alt="[4차/모집중] PBL기반 자바/스프링 백엔드 과정"> -->
-<!--                                 </div> -->
-<!--                                 <div class="category">K디지털트레이닝</div> -->
-<!--                                 <div class="txt-cont"> -->
-<!--                                     <div class="course-tit"> -->
-<!--                                         [4차/모집중] PBL기반 자바/스프링 백엔드 과정 -->
-<!--                                     </div> -->
-<!--                                     <div class="date"> -->
-<!--                                         2024-05-13 ~ 2024-07-26 -->
-<!--                                     </div> -->
-<!--                                     <div class="btns"> -->
-<!--                                         <div class="btn-more">자세히보기</div> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                                 <div class="status-badge ing"> -->
-<!--                                     24.03.20<br> -->
-<!--                                     개강 -->
-<!--                                 </div> -->
-<!--                             </a> -->
-<!--                         </div> -->
-<!--                         <div class="course-item"> -->
-<!--                             <a href="#" class="link-block"> -->
-<!--                                 <div class="thumb"> -->
-<!--                                     <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/08/24/F130_ai_rpa_small.png" alt="[모집완료] AI와 RPA기반 웹서비스 자동화 개발과정"> -->
-<!--                                 </div> -->
-<!--                                 <div class="category">K디지털트레이닝</div> -->
-<!--                                 <div class="txt-cont"> -->
-<!--                                     <div class="course-tit"> -->
-<!--                                         [모집완료] AI와 RPA기반 웹서비스 자동화 개발과정 -->
-<!--                                     </div> -->
-<!--                                     <div class="date"> -->
-<!--                                         2023-09-25 ~ 2024-03-20 -->
-<!--                                     </div> -->
-<!--                                     <div class="btns"> -->
-<!--                                         <div class="btn-more">자세히보기</div> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                                 <div class="status-badge end"> -->
-<!--                                     24.03.20<br> -->
-<!--                                     개강    -->
-<!--                                 </div> -->
-<!--                             </a> -->
-<!--                         </div> -->
+                        <!--                         <div class="course-item"> -->
+                        <!--                             <a href="#" class="link-block"> -->
+                        <!--                                 <div class="thumb"> -->
+                        <!--                                     <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/11/07/F138_cdi4e1al_small.png" alt="[4차/모집중] PBL기반 자바/스프링 백엔드 과정"> -->
+                        <!--                                 </div> -->
+                        <!--                                 <div class="category">K디지털트레이닝</div> -->
+                        <!--                                 <div class="txt-cont"> -->
+                        <!--                                     <div class="course-tit"> -->
+                        <!--                                         [4차/모집중] PBL기반 자바/스프링 백엔드 과정 -->
+                        <!--                                     </div> -->
+                        <!--                                     <div class="date"> -->
+                        <!--                                         2024-05-13 ~ 2024-07-26 -->
+                        <!--                                     </div> -->
+                        <!--                                     <div class="btns"> -->
+                        <!--                                         <div class="btn-more">자세히보기</div> -->
+                        <!--                                     </div> -->
+                        <!--                                 </div> -->
+                        <!--                                 <div class="status-badge ing"> -->
+                        <!--                                     24.03.20<br> -->
+                        <!--                                     개강 -->
+                        <!--                                 </div> -->
+                        <!--                             </a> -->
+                        <!--                         </div> -->
+                        <!--                         <div class="course-item"> -->
+                        <!--                             <a href="#" class="link-block"> -->
+                        <!--                                 <div class="thumb"> -->
+                        <!--                                     <img src="https://itcampus.hankyung.com/wp-content/uploads/mangboard/2023/08/24/F130_ai_rpa_small.png" alt="[모집완료] AI와 RPA기반 웹서비스 자동화 개발과정"> -->
+                        <!--                                 </div> -->
+                        <!--                                 <div class="category">K디지털트레이닝</div> -->
+                        <!--                                 <div class="txt-cont"> -->
+                        <!--                                     <div class="course-tit"> -->
+                        <!--                                         [모집완료] AI와 RPA기반 웹서비스 자동화 개발과정 -->
+                        <!--                                     </div> -->
+                        <!--                                     <div class="date"> -->
+                        <!--                                         2023-09-25 ~ 2024-03-20 -->
+                        <!--                                     </div> -->
+                        <!--                                     <div class="btns"> -->
+                        <!--                                         <div class="btn-more">자세히보기</div> -->
+                        <!--                                     </div> -->
+                        <!--                                 </div> -->
+                        <!--                                 <div class="status-badge end"> -->
+                        <!--                                     24.03.20<br> -->
+                        <!--                                     개강    -->
+                        <!--                                 </div> -->
+                        <!--                             </a> -->
+                        <!--                         </div> -->
 
                     </div>
                     <!-- 교육생 수강 후기 -->
                     <div class="review-wrap">
                         <h2 class="cont-tit">교육생 수강 후기</h2>
                         <div class="review-slide">
-                        	<th:block th:each="item:${plist}">
-	                        	<div class="item">
-	                                <div class="item-inner">
-	                                    <div class="txt-cont">
-	                                        <p class="txt" th:text="${item.pcontent}"></p>
-	                                    </div>
-	                                    <div class="review-info">
-	                                        <strong class="date">[[${item.pregdate}]] 수료</strong>
-<!-- 	                                        <p class="by">‘[[${item.ptitle}]]’ 수료생</p> -->
-	                                        <p class="by">‘[[${item.coursevo != null ? item.coursevo.cname : item.ptitle}]]’ 수료생</p>
-	                                    </div>
-	                                </div>
-	                            </div>
+                            <th:block th:each="item:${plist}">
+                                <div class="item">
+                                    <div class="item-inner">
+                                        <div class="txt-cont">
+                                            <p class="txt" th:text="${item.pcontent}"></p>
+                                        </div>
+                                        <div class="review-info">
+                                            <strong class="date">[[${item.pregdate}]] 수료</strong>
+                                            <!-- 	                                        <p class="by">‘[[${item.ptitle}]]’ 수료생</p> -->
+                                            <p class="by">‘[[${item.coursevo != null ? item.coursevo.cname :
+                                                item.ptitle}]]’ 수료생</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </th:block>
-<!--                             <div class="item"> -->
-<!--                                 <div class="item-inner"> -->
-<!--                                     <div class="txt-cont"> -->
-<!--                                         <p class="txt"> -->
-<!--                                             막연하게 시작하였지만 훌륭하고 좋은 강사님분들을 만나 강의를 받게 되었고 강의를 받으면서 구체적인 목표를 수립할 수 있게 되었습니다. 딱히 휴일 없이 6개월 짧지 않은 시간 힘이 안 들지는 않았지만 또래 친구들과 재미있게 할 수 있었습니다. 훈련 과정은 매우 유익했고 항상 잘 챙겨주시는 강사님들이 계셨습니다. 프로젝트를 하면서 많은 걸 배웠고 끝까지 같이 수강한 친구들과는 모두 다 잘 되고 인연이 계속 이어나갔으면 좋겠습니다. -->
-<!--                                         </p> -->
-<!--                                     </div> -->
-<!--                                     <div class="review-info"> -->
-<!--                                         <strong class="date">2022. 8.26 수료</strong> -->
-<!--                                         <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </div> -->
+                            <!--                             <div class="item"> -->
+                            <!--                                 <div class="item-inner"> -->
+                            <!--                                     <div class="txt-cont"> -->
+                            <!--                                         <p class="txt"> -->
+                            <!--                                             막연하게 시작하였지만 훌륭하고 좋은 강사님분들을 만나 강의를 받게 되었고 강의를 받으면서 구체적인 목표를 수립할 수 있게 되었습니다. 딱히 휴일 없이 6개월 짧지 않은 시간 힘이 안 들지는 않았지만 또래 친구들과 재미있게 할 수 있었습니다. 훈련 과정은 매우 유익했고 항상 잘 챙겨주시는 강사님들이 계셨습니다. 프로젝트를 하면서 많은 걸 배웠고 끝까지 같이 수강한 친구들과는 모두 다 잘 되고 인연이 계속 이어나갔으면 좋겠습니다. -->
+                            <!--                                         </p> -->
+                            <!--                                     </div> -->
+                            <!--                                     <div class="review-info"> -->
+                            <!--                                         <strong class="date">2022. 8.26 수료</strong> -->
+                            <!--                                         <p class="by">‘빅데이터 분석을 활용한 인공지능 기반 디지털트랜스포메이션’과정 수료생</p> -->
+                            <!--                                     </div> -->
+                            <!--                                 </div> -->
+                            <!--                             </div> -->
 
                         </div>
                         <div class="review-slide-paging slick-paging">
@@ -160,20 +175,23 @@
                     </div>
                     <!-- 협약기업 -->
                     <div class="partner-company">
-                        <h2 class="cont-tit">협약기업</h2>    
+                        <h2 class="cont-tit">협약기업</h2>
                         <div class="partner-list">
                             <div class="item">
                                 <img src="https://static.hankyung.com/resource/common/img/logo/logo-hk.svg" alt="한국경제">
                             </div>
                             <div class="item">
-                                <img src="https://static.hankyung.com/resource/common/img/logo/logo-hktv.svg" alt="한국경제TV">
-                            </div>    
+                                <img src="https://static.hankyung.com/resource/common/img/logo/logo-hktv.svg"
+                                    alt="한국경제TV">
+                            </div>
                         </div>
                         <div class="marquee partner-list1">
-                            <img src="https://static.hankyung.com/resource/itcampus/img/partner-list-1.png" class="partner-img" alt="협약기업">    
+                            <img src="https://static.hankyung.com/resource/itcampus/img/partner-list-1.png"
+                                class="partner-img" alt="협약기업">
                         </div>
                         <div class="marquee partner-list2">
-                            <img src="https://static.hankyung.com/resource/itcampus/img/partner-list-2.png" class="partner-img" alt="협약기업">    
+                            <img src="https://static.hankyung.com/resource/itcampus/img/partner-list-2.png"
+                                class="partner-img" alt="협약기업">
                         </div>
                     </div>
                     <div th:replace="fragments/homepage_contact :: homepage_contact"></div>
@@ -182,14 +200,15 @@
                 <div th:replace="fragments/homepage_footer :: homepage_footer"></div>
 
             </div>
-             <div th:replace="fragments/aside.html :: course-banner"></div>
+            <div th:replace="fragments/aside.html :: course-banner"></div>
         </div>
     </div>
 
     <!-- js: plugins -->
     <script src="https://hkstatic.hankyung.com/resource/common/library/jquery/v3.7.1/jquery-3.7.1.min.js"></script>
     <script src="https://hkstatic.hankyung.com/resource/common/library/slick/v1.6.0/slick.min.js"></script>
-    <script src="https://hkstatic.hankyung.com/resource/common/library/jquery-plugin/jquery.marquee/v1.6.0/jquery.marquee.min.js"></script>
+    <script
+        src="https://hkstatic.hankyung.com/resource/common/library/jquery-plugin/jquery.marquee/v1.6.0/jquery.marquee.min.js"></script>
 
     <!-- js: UI -->
     <script>
@@ -202,21 +221,21 @@
                 _$mainSlidePage.find('.curr').text('0' + i);
                 _$mainSlidePage.find('.total').text('0' + slick.slideCount);
             });
-             _$mainSlide.slick({
+            _$mainSlide.slick({
                 arrows: false,
                 infinite: true,
                 autoplay: true,
                 autoplaySpeed: 3000,
-                pauseOnHover : false
+                pauseOnHover: false
             });
-            function bar(){
-                $(".main-slide-paging .progress").css('width','0');
+            function bar() {
+                $(".main-slide-paging .progress").css('width', '0');
                 $(".main-slide-paging .progress").animate({
                     'width': '100%'
-                },3000);
+                }, 3000);
             }
             bar();
-            _$mainSlide.on('afterChange',function(){
+            _$mainSlide.on('afterChange', function () {
                 var curIdx = $(".slick-active").attr("data-slick-index");
                 curIdx = parseInt(curIdx);
                 bar();
@@ -230,7 +249,7 @@
                 _$reviewSlidePage.find('.curr').text(i);
                 _$reviewSlidePage.find('.total').text(slick.slideCount);
             });
-             _$reviewSlide.slick({
+            _$reviewSlide.slick({
                 arrows: true,
                 infinite: true,
                 variableWidth: true,
@@ -263,19 +282,19 @@
                 arrows: false,
                 dots: true
             });
-            
-            
+
+
             //모집 중, 개강완료 구별
-            $(".status-badge").each(function(){
-            	var csdate=$(this).children("span").text();
-            	
-            	var startDate=new Date(csdate);
-            	var currentDate=new Date();
-            	
-            	var differenceInDays = getDaysDifference(startDate,currentDate);
-            	$(this).attr("class",(differenceInDays>0? "status-badge end":"status-badge ing"));
+            $(".status-badge").each(function () {
+                var csdate = $(this).children("span").text();
+
+                var startDate = new Date(csdate);
+                var currentDate = new Date();
+
+                var differenceInDays = getDaysDifference(startDate, currentDate);
+                $(this).attr("class", (differenceInDays > 0 ? "status-badge end" : "status-badge ing"));
             });
-            
+
         });
         //개강 날짜 , 현재 날짜 비교
         function getDaysDifference(startDate, endDate) {
@@ -292,4 +311,5 @@
         }
     </script>
 </body>
+
 </html>

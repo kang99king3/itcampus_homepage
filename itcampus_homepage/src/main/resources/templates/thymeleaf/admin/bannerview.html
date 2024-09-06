@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>배너 수정폼</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/bootstrap/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- CK_Editor -->
+    <script type="text/javascript" th:src="@{/html/egovframework/com/cmm/utl/ckeditor/ckeditor.js?t=B37D54V}"></script>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin/main">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">ITCAMPUS Admin</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <!--             <li class="nav-item"> -->
+            <!--                 <a class="nav-link" href="index.html"> -->
+            <!--                     <i class="fas fa-fw fa-tachometer-alt"></i> -->
+            <!--                     <span>Dashboard</span></a> -->
+            <!--             </li> -->
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Hankyung.com
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/admin/course"> <i class="fas fa-fw fa-cog"></i>
+                    <span>과정등록</span></a>
+                <a class="nav-link collapsed" href="/admin/postcourse"> <i class="fas fa-fw fa-cog"></i>
+                    <span>후기등록</span></a>
+                <a class="nav-link collapsed" href="/admin/project"> <i class="fas fa-fw fa-cog"></i> <span>훈련생
+                        프로젝트등록</span></a>
+                <a class="nav-link collapsed" href="/admin/media"> <i class="fas fa-fw fa-cog"></i> <span>미디어</span></a>
+                <a class="nav-link collapsed" href="/admin/banner"> <i class="fas fa-fw fa-cog"></i>
+                    <span>배너관리</span></a>
+
+            </li>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">[[${session.loginUser.mname}]]</span>
+                                <img class="img-profile rounded-circle" src="/bootstrap/img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">배너 수정</h1>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Banner</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <form id="bform" method="post" enctype="multipart/form-data">
+                                    <!-- 배너 ID -->
+                                    <input type="hidden" name="bid" th:value="${bDetail.bid}" />
+
+                                    <!-- 등록일 -->
+                                    <input type="hidden" name="bregdate" th:value="${bDetail.bregdate}" />
+
+                                    <!-- 회원 번호 -->
+                                    <input type="hidden" name="mno" th:value="${bDetail.membervo.mno}" />
+
+                                    <table class="table table-bordered" width="100%" cellspacing="0">
+                                        <tbody>
+                                            <!-- 등록자 -->
+                                            <tr>
+                                                <th>등록자</th>
+                                                <td th:text="${bDetail.membervo.mid}"></td>
+                                            </tr>
+
+                                            <!-- 배너 이름 -->
+                                            <tr>
+                                                <th>배너 이름</th>
+                                                <td><input type="text" th:value="${bDetail.bname}" class="form-control"
+                                                        name="bname" required="required" /></td>
+                                            </tr>
+
+                                            <!-- 배너 URL -->
+                                            <tr>
+                                                <th>배너 URL</th>
+                                                <td>
+                                                    <select name="burl" class="form-control" required="required">
+                                                        <option value="">미디어를 선택하세요</option>
+                                                        <!-- mediaList를 반복문으로 출력 -->
+                                                        <th:block th:each="media : ${mediaList}">
+                                                            <option
+                                                                th:value="${#strings.substring(media.mdthumb, #strings.indexOf(media.mdthumb, '/media'))}"
+                                                                th:text="${media.mdname} + ' : ' + ${media.mdcontent}"
+                                                                th:selected="${#strings.substring(media.mdthumb, #strings.indexOf(media.mdthumb, '/media')) == bDetail.burl}">
+                                                            </option>
+                                                        </th:block>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <!-- 배너 target URL -->
+                                            <tr>
+                                                <th>배너 target URL</th>
+                                                <td><input type="text" th:value="${bDetail.btargeturl}"
+                                                        class="form-control" name="btargeturl" required="required" />
+                                                </td>
+                                            </tr>
+
+                                            <!-- 배너 target method-->
+                                            <tr>
+                                                <th>배너 target method</th>
+                                                <td>
+                                                    <select class="form-control" name="btargetmethod"
+                                                        required="required">
+                                                        <option th:value="_blank"
+                                                            th:selected="${bDetail.btargetmethod == '_blank'}">_blank
+                                                        </option>
+                                                        <option th:value="_self"
+                                                            th:selected="${bDetail.btargetmethod == '_self'}">_self
+                                                        </option>
+                                                        <option th:value="_parent"
+                                                            th:selected="${bDetail.btargetmethod == '_parent'}">_parent
+                                                        </option>
+                                                        <option th:value="_top"
+                                                            th:selected="${bDetail.btargetmethod == '_top'}">_top
+                                                        </option>
+                                                        <!-- 위 옵션들 중 어떤 값과도 일치하지 않을 경우, bDetail.btargetmethod 값을 출력 -->
+                                                        <option th:if="${bDetail.btargetmethod != '_blank' 
+                                                                        and bDetail.btargetmethod != '_self' 
+                                                                        and bDetail.btargetmethod != '_parent' 
+                                                                        and bDetail.btargetmethod != '_top'}" th:value="${bDetail.btargetmethod}" th:selected="true">
+                                                            <span th:text="${bDetail.btargetmethod}"></span>
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+
+                                            <!-- Alt 텍스트 -->
+                                            <tr>
+                                                <th>Alt 텍스트</th>
+                                                <td><input type="text" th:value="${bDetail.balt}" class="form-control"
+                                                        name="balt" required="required" /></td>
+                                            </tr>
+
+                                            <!-- 사용 여부 -->
+                                            <tr>
+                                                <th>사용 여부</th>
+                                                <td>
+                                                    <select name="buse" class="form-control" required="required">
+                                                        <option value="Y" th:selected="${bDetail.buse=='Y'}">Y</option>
+                                                        <option value="N" th:selected="${bDetail.buse=='N'}">N</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <!-- 등록일 -->
+                                            <tr>
+                                                <th>등록일</th>
+                                                <td th:text="${bDetail.bregdate}"></td>
+                                            </tr>
+
+                                            <!-- 버튼 -->
+                                            <tr>
+                                                <td colspan="2">
+                                                    <span class="float-right">
+                                                        <button class="btn btn-primary" id="list" type="button"
+                                                            style="width:100px;">목록</button>
+                                                        <button class="btn btn-primary" id="update" type="button"
+                                                            style="width:100px;">수정</button>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <!-- 생략: footer 관련 내용 -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <!-- 생략: Scroll to top 버튼 관련 내용 -->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/bootstrap/js/sb-admin-2.min.js"></script>
+
+    <script>
+
+        // 목록, 수정, 삭제 버튼 처리
+        $(function () {
+            $("#list").click(function () {
+                location.href = "/admin/banner";
+            });
+            $("#update").click(function () {
+                if (confirm("수정하시겠습니까?")) {
+                    var $bForm = $("#bform");
+                    $bForm.attr("action", "/admin/banner/update");
+                    document.getElementById("bform").submit();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

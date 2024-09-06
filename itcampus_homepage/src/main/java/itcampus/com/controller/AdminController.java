@@ -120,7 +120,7 @@ public class AdminController {
 		return "redirect:/admin/login";
 	}
 	
-	@GetMapping("/main")
+	@GetMapping({"/main", "/"})
 	public String main(Model model) { 
 		System.out.println("메인화면");
 		

@@ -39,6 +39,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         
         logger.info("-- 이미 로그인 되어 있음 : " + ((MemberVO)loginUser).getMid());
+
         return true; // 로그인한 경우, 컨트롤러 메소드 실행
     }
 
