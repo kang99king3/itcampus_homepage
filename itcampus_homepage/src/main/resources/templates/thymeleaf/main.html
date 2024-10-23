@@ -56,12 +56,8 @@
                                         <img th:src="${#strings.substring(item.cthumb,#strings.indexOf(item.cthumb,'/file'))}"
                                             th:alt="${item.cname}">
                                     </div>
-                                    <th:block th:if="${#strings.indexOf(item.ccate,'KDT') != -1}">
-                                        <div class="category">K디지털트레이닝</div>
-                                    </th:block>
-                                    <th:block th:unless="${#strings.indexOf(item.ccate,'KDT') != -1}">
-                                        <div class="category">국가기간전략산업직종</div>
-                                    </th:block>
+                                    <div class="category" th:text="${item.ccate}"></div>
+
                                     <div class="txt-cont">
                                         <div class="course-tit" th:text="${item.cname}"></div>
                                         <div class="date"

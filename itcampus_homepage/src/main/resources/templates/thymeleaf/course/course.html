@@ -17,12 +17,8 @@
                                 <div class="thumb">
                                     <img th:src="${#strings.substring(item.cthumb,#strings.indexOf(item.cthumb,'/file'))}" th:alt="${item.cname}">
                                 </div>
-                                <th:block th:if="${#strings.indexOf(item.ccate,'KDT') != -1}">
-                                	<div class="category">K디지털트레이닝</div>                                
-                                </th:block>
-                                <th:block th:unless="${#strings.indexOf(item.ccate,'KDT') != -1}">
-                                	<div class="category">국가기간전략산업직종</div>                                
-                                </th:block>
+                                <div class="category" th:text="${item.ccate}"></div>
+
                                 <div class="txt-cont">
                                     <div class="course-tit" th:text="${item.cname}"></div>
                                     <div class="date" 
@@ -148,11 +144,14 @@
         }
         //카테고리값에 따라 해당 사업내용으로 값 변환
         function category(cate){
-        	if(cate.indexOf("KDT")!=-1){
-        		return '<div class="category">K디지털트레이닝</div>';
-        	}else{
-        		return '<div class="category">국가기간전략산업직종</div>';
-        	}
+            // 카테고리를 코드로 하지않고 그냥 실제이름으로 전부 변경함.
+            return '<div class="category">' + cate +'</div>';
+
+        	//if(cate.indexOf("KDT")!=-1){
+        	//	return '<div class="category">K디지털트레이닝</div>';
+        	//}else{
+        	//	return '<div class="category">국가기간전략산업직종</div>';
+        	//}
         }
       //개강 날짜 , 현재 날짜 비교
         function getDaysDifference(startDate, endDate) {
