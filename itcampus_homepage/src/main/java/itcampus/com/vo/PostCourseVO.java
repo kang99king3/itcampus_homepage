@@ -32,7 +32,7 @@ public class PostCourseVO {
 	int pid;
 	
 	@Schema(description = "코스번호")
-	@ManyToOne
+	@ManyToOne(optional = true)
 	@JoinColumn(name="C_ID",nullable = true)
 	CourseVO coursevo;
 	

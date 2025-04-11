@@ -178,7 +178,10 @@
 	                                            	</div>
 	                                            	<div class="row mb-3 a">
 													    <div class="col-11">
-													    	<input type="hidden" class="form-control" name="cid" th:value="${pDetail.coursevo == null ? '':pDetail.coursevo.cid}"/>
+<!-- 													    	<input type="hidden" class="form-control" name="cid" th:value="${pDetail.coursevo == null ? '':pDetail.coursevo.cid}"/> -->
+																<th:block th:if="${pDetail.coursevo != null}">
+																  <input type="hidden" name="cid" th:value="${pDetail.coursevo.cid}" />
+																</th:block>
 													        <input type="text" class="form-control" name="cname" th:value="${pDetail.coursevo == null ? '':pDetail.coursevo.cname}" placeholder="검색하여 입력" readonly="readonly">
 													    </div>
 													    <div class="col-auto">
@@ -372,8 +375,8 @@
 		
 		    //과정명 작성시 유효값처리
 		    $("#postcourseUpdateForm").submit(function(){
-		    	var cname_sel=$("input[name=cname]").val();
-		    	var ptitle_sel=$("input[name=ptitle]").val();
+		    	var cname_sel=$("input[name=cname]").val().trim();
+		    	var ptitle_sel=$("input[name=ptitle]").val().trim();
 		    	if((cname_sel==""&&ptitle_sel=="")){
 // 		    		$("input[name=ptitle]").after("<span>과정명은 '검색' 또는 '직접작성' 중 하나는 반드시 작성해야 합니다.</span>");
 		    		alert("반드시 하나는 작성");	

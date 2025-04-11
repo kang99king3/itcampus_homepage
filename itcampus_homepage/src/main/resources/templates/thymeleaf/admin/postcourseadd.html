@@ -188,7 +188,7 @@
 													</div>
 													<div class="row mb-3 b">    
 													    <div class="col-11">
-													        <input type="text" class="form-control"name="ptitle" placeholder="직접입력">
+													        <input type="text" class="form-control"name="ptitle" required="required" placeholder="직접입력">
 													    </div>
 													</div> 
 	                                            </td>
@@ -381,8 +381,8 @@
 		    })
 		
 		    $("#postcourseAddForm").submit(function(){
-		    	var cname_sel=$("input[name=cname]").val();
-		    	var ptitle_sel=$("input[name=ptitle]").val();
+		    	var cname_sel=$("input[name=cname]").val().trim();
+		    	var ptitle_sel=$("input[name=ptitle]").val().trim();
 		    	if((cname_sel==""&&ptitle_sel=="")){
 		    		alert("과정명을 작성하세요");	
 		    		$("select[name=course_sel]").focus();
