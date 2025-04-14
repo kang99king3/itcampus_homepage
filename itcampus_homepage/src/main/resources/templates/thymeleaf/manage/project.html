@@ -18,7 +18,8 @@
 	                        <div class="item-wrap">
 	                            <a href="#">
 	                                <figure class="item">
-	                                    <img th:src="${#strings.substring(item.sthumb,#strings.indexOf(item.sthumb,'/file'))}" alt="훈련생 프로젝트 이름">
+	                                    <img th:src="${#strings.substring(item.sthumb,#strings.indexOf(item.sthumb,'/file'))}"
+	                                    style="border:1px solid #dcdcdc;" alt="훈련생 프로젝트 이름">
 	                                    <figcaption th:text="${item.stitle}"></figcaption>
 	                                </figure>
 	                            </a>
